@@ -1,0 +1,1630 @@
+<!DOCTYPE html><html lang="en" dir="ltr" data-theme="dark" data-has-toc data-has-sidebar class="astro-g5ptsecz"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Error reference | Stewart</title><link rel="canonical" href="https://stewart-php.github.io/docs/reference/errors/"/><link rel="sitemap" href="/docs/sitemap-index.xml"/><link rel="shortcut icon" href="/docs/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v7.3.2"/><meta name="generator" content="Starlight v0.42.6"/><meta property="og:title" content="Error reference"/><meta property="og:type" content="article"/><meta property="og:url" content="https://stewart-php.github.io/docs/reference/errors/"/><meta property="og:locale" content="en"/><meta property="og:description" content="Every error reason Stewart reports, its message, and what to do about it."/><meta property="og:site_name" content="Stewart"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="Every error reason Stewart reports, its message, and what to do about it."/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg><svg aria-hidden="true" class="dark astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg><svg aria-hidden="true" class="auto astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg></template><link rel="stylesheet" href="/docs/_astro/print.ehPL0gv-.css" media="print"><link rel="stylesheet" href="/docs/_astro/common.BhE-JJsQ.css"><script type="module" src="/docs/_astro/page.Dwipeu-R.js"></script></head><body class="astro-g5ptsecz"><a class="sl-skip-link astro-qb7clj6f" href="#_top">Skip to content</a><div class="page sl-flex astro-yntsjkba"><header class="header astro-yntsjkba"><div class="header astro-by6fddyj"><div class="title-wrapper sl-flex astro-by6fddyj"><a href="/docs/" class="site-title sl-flex astro-6rvad3va"><span class="astro-6rvad3va" translate="no">Stewart</span></a></div><div class="sl-flex print:hidden astro-by6fddyj"><site-search class="astro-by6fddyj astro-b5kgnn7o" data-translations="{&quot;placeholder&quot;:&quot;Search&quot;}"><button data-open-modal disabled aria-label="Search" aria-keyshortcuts="Control+K" class="astro-b5kgnn7o"><svg aria-hidden="true" class="astro-b5kgnn7o astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg><span class="sl-hidden md:sl-block astro-b5kgnn7o" aria-hidden="true">Search</span><kbd class="sl-hidden md:sl-flex astro-b5kgnn7o" style="display: none;"><kbd class="astro-b5kgnn7o">Ctrl</kbd><kbd class="astro-b5kgnn7o">K</kbd></kbd></button><dialog style="padding:0" aria-label="Search" class="astro-b5kgnn7o"><div class="dialog-frame sl-flex astro-b5kgnn7o"><button data-close-modal class="sl-flex md:sl-hidden astro-b5kgnn7o">Cancel</button><div class="search-container astro-b5kgnn7o"><div id="starlight__search" class="astro-b5kgnn7o"></div></div></div></dialog></site-search><script>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script><script type="module" src="/docs/_astro/Search.astro_astro_type_script_index_0_lang.BhvQlLS9.js"></script></div><div class="sl-hidden md:sl-flex print:hidden right-group astro-by6fddyj"><div class="sl-flex social-icons astro-by6fddyj"><a href="https://github.com/stewart-php" rel="me" class="sl-flex astro-n2mnl6yq"><span class="sr-only astro-n2mnl6yq">GitHub</span><svg aria-hidden="true" class="astro-n2mnl6yq astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-rapide-theme-select class="astro-xgdtbcdp"><button aria-label="Select theme" aria-live="polite" class="sl-flex astro-xgdtbcdp" title="Select theme"><svg aria-hidden="true" height="16" viewBox="0 0 24 24" width="16" class="astro-xgdtbcdp"><mask class="moon astro-xgdtbcdp" id="moon-mask-f2a5385d"><rect x="0" y="0" width="100%" height="100%" fill="white" class="astro-xgdtbcdp"></rect><circle cx="24" cy="10" r="6" fill="black" class="astro-xgdtbcdp"></circle></mask><circle class="sun astro-xgdtbcdp" cx="12" cy="12" r="6" mask="url(#moon-mask-f2a5385d)"></circle><g class="sun-beams astro-xgdtbcdp" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="3" class="astro-xgdtbcdp"></line><line x1="12" y1="21" x2="12" y2="23" class="astro-xgdtbcdp"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" class="astro-xgdtbcdp"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" class="astro-xgdtbcdp"></line><line x1="1" y1="12" x2="3" y2="12" class="astro-xgdtbcdp"></line><line x1="21" y1="12" x2="23" y2="12" class="astro-xgdtbcdp"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" class="astro-xgdtbcdp"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" class="astro-xgdtbcdp"></line></g></svg></button></starlight-rapide-theme-select><script>
+  StarlightThemeProvider.updatePickers()
+</script><script type="module">var e=`starlight-theme`;function t(e){return e===`auto`||e===`dark`||e===`light`?e:`auto`}function n(){return t(typeof localStorage<`u`&&localStorage.getItem(e))}function r(t){typeof localStorage<`u`&&localStorage.setItem(e,t===`light`||t===`dark`?t:``)}function i(){return matchMedia(`(prefers-color-scheme: light)`).matches?`light`:`dark`}function a(e){StarlightThemeProvider.updatePickers(e),document.documentElement.dataset.theme=e===`auto`?i():e,r(e)}matchMedia(`(prefers-color-scheme: light)`).addEventListener(`change`,()=>{n()===`auto`&&a(`auto`)}),customElements.define(`starlight-rapide-theme-select`,class extends HTMLElement{constructor(){super(),a(n());let e=this.querySelector(`button`);e?.addEventListener(`click`,()=>{let n=t(document.documentElement.dataset.theme),r=n===`dark`?`light`:n===`light`?`dark`:`auto`;a(r),e?.setAttribute(`aria-label`,`${r} theme`)})}});</script></div></div></header><nav class="sidebar print:hidden astro-yntsjkba" aria-label="Main"><button popovertarget="starlight__sidebar" class="sl-menu-button sl-flex md:sl-hidden print:hidden astro-r2osgdlg"><svg aria-hidden="true" class="open-menu astro-r2osgdlg astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg><svg aria-hidden="true" class="close-menu astro-r2osgdlg astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg><span class="sr-only astro-r2osgdlg">Menu</span></button><script type="module">var e=class extends HTMLElement{constructor(){super();let e=matchMedia(`(min-width: 50em)`),t=()=>{this.popover=e.matches?null:`auto`};t(),e.addEventListener(`change`,()=>t()),this.addEventListener(`toggle`,({newState:e})=>this.trapFocus(e===`open`))}trapFocus(e){document.querySelectorAll(`.main-frame, .sl-skip-link`).forEach(t=>{t.toggleAttribute(`inert`,e)})}};customElements.define(`sl-sidebar-pane`,e);</script><sl-sidebar-pane popover id="starlight__sidebar" class="sidebar-pane astro-yntsjkba"><div class="sidebar-content sl-flex astro-yntsjkba"><sl-sidebar-state-persist data-hash="0q5cidr" class="astro-ipdry5cl"><script aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script><ul class="top-level astro-rmhv4bp6"><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Get started</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="0"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/docs/start/install/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Install Stewart</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/start/first-app/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Your first app</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/start/project-tour/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Project tour</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Guides</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="1"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/docs/guides/how-it-works/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">How it works</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/guides/apps/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Anatomy of an app</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/guides/state-changes/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">State changes</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/guides/events/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Events</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/guides/scheduling/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Scheduling and waiting</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/guides/calling-services/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Calling services</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/guides/configuration/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Configuration</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/guides/persistence/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Persistence</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/guides/codegen/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Typed entities</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/guides/history/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">State history</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/guides/registry/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Areas, floors and labels</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/guides/triggers/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Triggers</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/guides/sun/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Sun</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/guides/mqtt/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">MQTT</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/guides/exposed-entities/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Exposed entities</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/guides/testing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Testing apps</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/guides/status/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Status and control</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/guides/handling-errors/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Handling errors</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Recipes</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="2"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/docs/recipes/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">All recipes</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/recipes/motion-light/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Motion light</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/recipes/presence-heating/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Heating by presence</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/recipes/door-left-open/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Door left open</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/recipes/sun-blinds/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Blinds against the sun</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/recipes/daily-energy/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Daily energy summary</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/recipes/zigbee-remote/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Zigbee remote over MQTT</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/recipes/guest-mode/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Guest mode switch</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Deploy</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="3"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/docs/deploy/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Choosing a deployment</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/deploy/checkout/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">A checkout on the server</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/deploy/git/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Following a Git branch</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/deploy/image/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">An image built by CI</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/deploy/kubernetes/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Kubernetes</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/deploy/operations/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Running in production</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Reference</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="4"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/docs/reference/configuration/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Configuration reference</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/reference/cli/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Command reference</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/reference/errors/" aria-current="page" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Error reference</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/reference/metrics/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Metrics reference</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/reference/admin-api/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Admin API reference</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Help</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="5"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/docs/help/troubleshooting/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Troubleshooting</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/help/faq/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">FAQ</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/help/glossary/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Glossary</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/help/upgrading/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Upgrading</span></a></li><li class="astro-rmhv4bp6"><a href="/docs/help/coming-from/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Coming from other tools</span></a></li></ul></details></li></ul><script aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script></sl-sidebar-state-persist><div class="md:sl-hidden"><div class="mobile-preferences sl-flex astro-p4azlveh"><div class="social-icons astro-p4azlveh"><a href="https://github.com/stewart-php" rel="me" class="sl-flex astro-n2mnl6yq"><span class="sr-only astro-n2mnl6yq">GitHub</span><svg aria-hidden="true" class="astro-n2mnl6yq astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-rapide-theme-select class="astro-xgdtbcdp"><button aria-label="Select theme" aria-live="polite" class="sl-flex astro-xgdtbcdp" title="Select theme"><svg aria-hidden="true" height="16" viewBox="0 0 24 24" width="16" class="astro-xgdtbcdp"><mask class="moon astro-xgdtbcdp" id="moon-mask-18cfe598"><rect x="0" y="0" width="100%" height="100%" fill="white" class="astro-xgdtbcdp"></rect><circle cx="24" cy="10" r="6" fill="black" class="astro-xgdtbcdp"></circle></mask><circle class="sun astro-xgdtbcdp" cx="12" cy="12" r="6" mask="url(#moon-mask-18cfe598)"></circle><g class="sun-beams astro-xgdtbcdp" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="3" class="astro-xgdtbcdp"></line><line x1="12" y1="21" x2="12" y2="23" class="astro-xgdtbcdp"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" class="astro-xgdtbcdp"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" class="astro-xgdtbcdp"></line><line x1="1" y1="12" x2="3" y2="12" class="astro-xgdtbcdp"></line><line x1="21" y1="12" x2="23" y2="12" class="astro-xgdtbcdp"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" class="astro-xgdtbcdp"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" class="astro-xgdtbcdp"></line></g></svg></button></starlight-rapide-theme-select><script>
+  StarlightThemeProvider.updatePickers()
+</script></div></div></div></sl-sidebar-pane></nav><div class="main-frame astro-yntsjkba"><script type="module">var e=document.getElementById(`starlight__sidebar`),t=e?.querySelector(`sl-sidebar-state-persist`),n=`sl-sidebar-state`,r=()=>{let r=[],i=t?.dataset.hash||``;try{let e=sessionStorage.getItem(n),t=JSON.parse(e||`{}`);Array.isArray(t.open)&&t.hash===i&&(r=t.open)}catch{}return{hash:i,open:r,scroll:e?.scrollTop||0}},i=e=>{try{sessionStorage.setItem(n,JSON.stringify(e))}catch{}},a=()=>i(r()),o=(e,t)=>{let n=r();n.open[t]=e,i(n)};t?.addEventListener(`click`,e=>{if(!(e.target instanceof Element))return;let t=e.target.closest(`summary`)?.closest(`details`);if(!t)return;let n=t.querySelector(`sl-sidebar-restore`),r=parseInt(n?.dataset.index||``);isNaN(r)||o(!t.open,r)}),addEventListener(`visibilitychange`,()=>{document.visibilityState===`hidden`&&a()});</script><div class="lg:sl-flex astro-lrzkfocr"><aside class="right-sidebar-container print:hidden astro-lrzkfocr"><div class="right-sidebar astro-lrzkfocr"><div class="lg:sl-hidden astro-qok35upx"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-66cqc7ze"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-66cqc7ze"><details id="starlight__mobile-toc" class="astro-66cqc7ze"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-66cqc7ze"><span class="toggle sl-flex astro-66cqc7ze">On this page<svg aria-hidden="true" class="caret astro-66cqc7ze astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></span><span class="display-current astro-66cqc7ze"></span></summary><div class="dropdown astro-66cqc7ze"><ul class="isMobile astro-jugkfwgx" style="--depth: 0;"><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#_top" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Overview</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#haclienterror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">HaClientError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#codegenerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">CodegenError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#commanderror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">CommandError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#eventfireerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">EventFireError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#exposureerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">ExposureError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#historyerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">HistoryError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#identifiererror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">IdentifierError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#mqtterror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">MqttError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#registryediterror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">RegistryEditError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#scheduleerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">ScheduleError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#selectorerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">SelectorError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#servicecallerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">ServiceCallError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#stateerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">StateError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#storeerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">StoreError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#sunerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">SunError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#timeerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">TimeError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#topicerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">TopicError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#triggererror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">TriggerError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#waiterror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">WaitError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#mqttclienterror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">MqttClientError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#apperror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">AppError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#brokererror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">BrokerError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#configurationerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">ConfigurationError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#containererror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">ContainerError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#controlerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">ControlError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#deployerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">DeployError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#transporterror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">TransportError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#workererror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">WorkerError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#storesetuperror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">StoreSetupError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#jsonshapeerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">JsonShapeError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#harnesserror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">HarnessError</span></a></li></ul></div></details></nav></mobile-starlight-toc><script type="module" src="/docs/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.C3fM4Kra.js"></script></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-qok35upx"><div class="sl-container astro-qok35upx"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">On this page</h2><ul class="astro-jugkfwgx" style="--depth: 0;"><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#_top" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Overview</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#haclienterror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">HaClientError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#codegenerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">CodegenError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#commanderror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">CommandError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#eventfireerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">EventFireError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#exposureerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">ExposureError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#historyerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">HistoryError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#identifiererror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">IdentifierError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#mqtterror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">MqttError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#registryediterror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">RegistryEditError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#scheduleerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">ScheduleError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#selectorerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">SelectorError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#servicecallerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">ServiceCallError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#stateerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">StateError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#storeerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">StoreError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#sunerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">SunError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#timeerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">TimeError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#topicerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">TopicError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#triggererror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">TriggerError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#waiterror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">WaitError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#mqttclienterror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">MqttClientError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#apperror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">AppError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#brokererror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">BrokerError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#configurationerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">ConfigurationError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#containererror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">ContainerError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#controlerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">ControlError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#deployerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">DeployError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#transporterror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">TransportError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#workererror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">WorkerError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#storesetuperror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">StoreSetupError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#jsonshapeerror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">JsonShapeError</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#harnesserror" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">HarnessError</span></a></li></ul></nav></starlight-toc><script type="module" src="/docs/_astro/TableOfContents.astro_astro_type_script_index_0_lang.BpJaGz7G.js"></script></div></div></div></aside><div class="main-pane astro-lrzkfocr"><main data-pagefind-body class="astro-g5ptsecz" lang="en" dir="ltr"><div class="content-panel astro-a7po4psb"><div class="sl-container astro-a7po4psb"><h1 id="_top" class="astro-bebwqqxs">Error reference</h1></div></div><div class="content-panel astro-a7po4psb"><div class="sl-container astro-a7po4psb"><div class="sl-markdown-content"><!-- Generated by `make docs-reference` from the code; edit the generator in docs/generator/, not this file. -->
+<p>Every failure Stewart reports has a reason. The exception class names the part of Stewart that failed, and
+<code dir="auto">$e-&gt;reason</code> names the failure: <code dir="auto">StoreError::TypeMismatch</code> belongs to a <code dir="auto">StoreException</code>. Words in braces are
+filled in from <code dir="auto">$e-&gt;context</code>. <a href="/docs/guides/handling-errors/">Handling errors</a> explains how to catch them.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="haclienterror">HaClientError</h2><a class="sl-anchor-link" href="#haclienterror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “HaClientError”</span></a></div>
+<p>Thrown as <code dir="auto">HaClientException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">ClosedLocally</code></td>
+<td>The connection was closed locally while {phase}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ConnectTimedOut</code></td>
+<td>Connecting to Home Assistant at {url} timed out after {timeout}. Check home_assistant.url.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ConnectFailed</code></td>
+<td>Could not connect to Home Assistant at {url}: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">NotConnected</code></td>
+<td>Not connected to Home Assistant.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">SendFailed</code></td>
+<td>Failed to send {command}: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ClosedDuringAuthentication</code></td>
+<td>Home Assistant closed the connection during authentication.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ConnectionDropped</code></td>
+<td>The connection to Home Assistant was lost ({detail}).</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">MessageTooLarge</code></td>
+<td>Home Assistant sent a message over the size limit, so the connection was dropped. Raise home_assistant.message_size_limit or home_assistant.frame_size_limit.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ProtocolViolation</code></td>
+<td>Home Assistant sent {detail}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">CommandTimedOut</code></td>
+<td>Home Assistant did not answer {command} within {timeout}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">CommandRejected</code></td>
+<td>{command} failed: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">CommandUnauthorized</code></td>
+<td>{command} failed: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">CommandUnencodable</code></td>
+<td>{command} could not be encoded: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">UnexpectedGreeting</code></td>
+<td>Expected auth_required from Home Assistant, got “{receivedType}”.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">TokenRejected</code></td>
+<td>Home Assistant rejected the access token: {reason}. Check STEWART_HOME_ASSISTANT__TOKEN.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">AdministratorRequired</code></td>
+<td>Home Assistant refused the event subscription; the access token must belong to an administrator. Update STEWART_HOME_ASSISTANT__TOKEN.</td>
+<td>Create the token from a Home Assistant administrator.</td>
+</tr>
+<tr>
+<td><code dir="auto">EventBacklogExceeded</code></td>
+<td>Event handlers are more than {limit} events behind; dropping the connection.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">EventQueueReentered</code></td>
+<td>An event callback cannot wait for the event queue it is being delivered by.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">UrlInvalid</code></td>
+<td>“{url}” is not a Home Assistant URL; use http://, https://, ws:// or wss:// and a host.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ComponentInstanceInvalid</code></td>
+<td>“{instance}” is not an instance name; use lowercase letters, digits and underscores, starting with a letter, up to 64 characters.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="codegenerror">CodegenError</h2><a class="sl-anchor-link" href="#codegenerror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “CodegenError”</span></a></div>
+<p>Thrown as <code dir="auto">CodegenException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">SnapshotUnreadable</code></td>
+<td>Snapshot {path} cannot be read.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">SnapshotNotJson</code></td>
+<td>Snapshot {path} is not valid JSON: {reason}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">NotASnapshot</code></td>
+<td>{path} is not a snapshot; write one with <code dir="auto">stewart generate --snapshot-out</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">OutputDirectoryNotCreatable</code></td>
+<td>Cannot create output directory {path}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">FileNotWritable</code></td>
+<td>Cannot write {path}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">FileNotDeletable</code></td>
+<td>Cannot delete {path}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">UnmarkedFileInTheWay</code></td>
+<td>{path} was not written by stewart generate; move it out of the output directory.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ShrinkRefused</code></td>
+<td>Generating would delete {deleted} of {existing} generated files; run <code dir="auto">make generate ARGS=--allow-shrink</code> if that is intended.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">HomeAssistantNotRunning</code></td>
+<td>Home Assistant is {state}; run <code dir="auto">stewart generate</code> again once it has started.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="commanderror">CommandError</h2><a class="sl-anchor-link" href="#commanderror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “CommandError”</span></a></div>
+<p>Thrown as <code dir="auto">CommandException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">Rejected</code></td>
+<td>{reason}</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="eventfireerror">EventFireError</h2><a class="sl-anchor-link" href="#eventfireerror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “EventFireError”</span></a></div>
+<p>Thrown as <code dir="auto">EventFireException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">TypeInvalid</code></td>
+<td>An event type must be 1 to 64 characters, got “{eventType}”.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">DataInvalid</code></td>
+<td>Data of event {eventType} at {path} is {actualType}; expected null, a finite scalar or an array of those.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">DataNotKeyed</code></td>
+<td>Data of event {eventType} must be keyed by name, got a list.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">Rejected</code></td>
+<td>Event {eventType} was rejected by Home Assistant: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">Unreachable</code></td>
+<td>Event {eventType} could not reach Home Assistant: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">TimedOut</code></td>
+<td>Event {eventType} timed out: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">Overloaded</code></td>
+<td>Event {eventType} was refused: {detail}</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="exposureerror">ExposureError</h2><a class="sl-anchor-link" href="#exposureerror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “ExposureError”</span></a></div>
+<p>Thrown as <code dir="auto">ExposureException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">ComponentMissing</code></td>
+<td>Entity {key} cannot be exposed because the stewart Home Assistant integration is not installed; see <code dir="auto">stewart status</code>.</td>
+<td>Install the Stewart integration in Home Assistant and restart it.</td>
+</tr>
+<tr>
+<td><code dir="auto">ProtocolMismatch</code></td>
+<td>Entity {key} cannot be exposed because the stewart Home Assistant integration speaks another protocol; see <code dir="auto">stewart status</code>.</td>
+<td>Update Stewart or the integration so both have the same version.</td>
+</tr>
+<tr>
+<td><code dir="auto">ComponentRefused</code></td>
+<td>Entity {key} cannot be exposed because Home Assistant refused the stewart integration session; see <code dir="auto">stewart status</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">OutsideApp</code></td>
+<td>Entity {key} cannot be exposed outside an app, because its unique ID needs an app ID.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">KeyInvalid</code></td>
+<td>Exposed entity key “{key}” is invalid; use up to {limit} lowercase letters, digits and “_”, starting with a letter.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">KeyTaken</code></td>
+<td>App {appId} already exposes an entity with key {key}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ConfigInvalid</code></td>
+<td>Home Assistant cannot use this entity configuration: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">StateInvalid</code></td>
+<td>Home Assistant cannot use this entity state: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">Removed</code></td>
+<td>Exposed entity {key} was removed; expose it again to use it.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">Unreachable</code></td>
+<td>Could not reach the broker for exposed entity {key}: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">TimedOut</code></td>
+<td>The broker did not answer for exposed entity {key} within {timeout}.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="historyerror">HistoryError</h2><a class="sl-anchor-link" href="#historyerror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “HistoryError”</span></a></div>
+<p>Thrown as <code dir="auto">HistoryException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">WindowInvalid</code></td>
+<td>A history window must end after it starts, got {startsAt} to {endsAt}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">RecorderUnavailable</code></td>
+<td>History of {entityId} is unavailable because Home Assistant has no history integration loaded.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">Rejected</code></td>
+<td>History of {entityId} was rejected by Home Assistant: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">Unreachable</code></td>
+<td>History of {entityId} could not reach Home Assistant: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">TimedOut</code></td>
+<td>History of {entityId} timed out: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">Overloaded</code></td>
+<td>History of {entityId} was refused: {detail}</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="identifiererror">IdentifierError</h2><a class="sl-anchor-link" href="#identifiererror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “IdentifierError”</span></a></div>
+<p>Thrown as <code dir="auto">IdentifierException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">EntityIdInvalid</code></td>
+<td>Entity ID “{entityId}” is invalid; expected “<domain>.&lt;object_id&gt;” in lowercase letters, digits and “_”.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">AppIdInvalid</code></td>
+<td>App ID “{appId}” is invalid; use lowercase letters, digits, “-” and “_”, starting with a letter.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">AppIdTooLong</code></td>
+<td>App ID “{appId}” is longer than {limit} characters.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">EntityNotGenerated</code></td>
+<td>Entity ID “{entityId}” is not a generated {domain} entity; run <code dir="auto">stewart generate</code> if it is new.</td>
+<td>Fix the ID, or run <code dir="auto">make generate</code> for a new entity.</td>
+</tr>
+<tr>
+<td><code dir="auto">RegistryIdEmpty</code></td>
+<td>{kind} ID must not be empty.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="mqtterror">MqttError</h2><a class="sl-anchor-link" href="#mqtterror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “MqttError”</span></a></div>
+<p>Thrown as <code dir="auto">MqttException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">TopicInvalid</code></td>
+<td>MQTT topic {topic} must be non-empty UTF-8, free of +, # and NUL characters.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">PayloadUnencodable</code></td>
+<td>MQTT payload for {topic} cannot be encoded as JSON: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">PayloadNotJson</code></td>
+<td>MQTT payload on {topic} is not valid JSON: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">NotConfigured</code></td>
+<td>MQTT is not configured; set mqtt.url in stewart.yaml or STEWART_MQTT__URL in .env.</td>
+<td>Set <code dir="auto">STEWART_MQTT__URL</code>.</td>
+</tr>
+<tr>
+<td><code dir="auto">PublishFailed</code></td>
+<td>Could not hand the MQTT message for {topic} to the broker: {cause}</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="registryediterror">RegistryEditError</h2><a class="sl-anchor-link" href="#registryediterror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “RegistryEditError”</span></a></div>
+<p>Thrown as <code dir="auto">RegistryEditException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">NotFound</code></td>
+<td>Entity {entityId} is not in the Home Assistant entity registry.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">NothingToUpdate</code></td>
+<td>The registry update for {entityId} changes nothing.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">Rejected</code></td>
+<td>Home Assistant rejected the registry update for {entityId}: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">Unreachable</code></td>
+<td>The registry update for {entityId} could not reach Home Assistant: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">TimedOut</code></td>
+<td>The registry update for {entityId} timed out: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">Overloaded</code></td>
+<td>The registry update for {entityId} was refused: {detail}</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="scheduleerror">ScheduleError</h2><a class="sl-anchor-link" href="#scheduleerror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “ScheduleError”</span></a></div>
+<p>Thrown as <code dir="auto">ScheduleException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">CronInvalid</code></td>
+<td>Cron expression “{expression}” is invalid.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">EntityTimeDomainUnsupported</code></td>
+<td>Entity “{entityId}” holds no time; expected an input_datetime or a sensor entity.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">SunLocationUnknown</code></td>
+<td>A {event} schedule needs a location, and Home Assistant reported none.</td>
+<td>Set a location in Home Assistant under Settings → System → General, then restart Stewart.</td>
+</tr>
+<tr>
+<td><code dir="auto">TimeOfDayInvalid</code></td>
+<td>Time of day “{value}” is invalid; expected “HH:MM” or “HH:MM:SS”.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">TimeOfDayOutOfRange</code></td>
+<td>Time of day {unit} {value} is outside 0-{highest}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">TimeWindowEmpty</code></td>
+<td>Time window starts and ends at {time}; start and end must differ.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="selectorerror">SelectorError</h2><a class="sl-anchor-link" href="#selectorerror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “SelectorError”</span></a></div>
+<p>Thrown as <code dir="auto">SelectorException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">Empty</code></td>
+<td>{selectorKind} cannot be empty.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">RegexInvalid</code></td>
+<td>Regular expression selector {pattern} is invalid: {compileError}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">MqttFilterInvalid</code></td>
+<td>MQTT topic filter {filter} must use + and # only as whole levels, with # last.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="servicecallerror">ServiceCallError</h2><a class="sl-anchor-link" href="#servicecallerror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “ServiceCallError”</span></a></div>
+<p>Thrown as <code dir="auto">ServiceCallException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">Rejected</code></td>
+<td>{domain}.{service} was rejected by Home Assistant: {detail}</td>
+<td>Try the same call under Developer tools → Actions in Home Assistant.</td>
+</tr>
+<tr>
+<td><code dir="auto">Unreachable</code></td>
+<td>{domain}.{service} could not reach Home Assistant: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">TimedOut</code></td>
+<td>{domain}.{service} timed out: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">Overloaded</code></td>
+<td>{domain}.{service} was refused: {detail}</td>
+<td>Call fewer services at once, for example one call with several targets.</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="stateerror">StateError</h2><a class="sl-anchor-link" href="#stateerror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “StateError”</span></a></div>
+<p>Thrown as <code dir="auto">StateException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">EntityNotFound</code></td>
+<td>Entity “{entityId}” does not exist in Home Assistant.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">StateChangedViaEvents</code></td>
+<td>The “{eventType}” event is only delivered through watchStateChanges(), not watchEvents().</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ThresholdHysteresisNegative</code></td>
+<td>The hysteresis of {usage}() is {hysteresis}; it must be zero or more.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ThresholdNotFinite</code></td>
+<td>The threshold of {usage}() is {threshold}; it must be a finite number.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">TransitionRuleConflict</code></td>
+<td>whenChangedTo() takes either from: or fromAnyState:, not both.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="storeerror">StoreError</h2><a class="sl-anchor-link" href="#storeerror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “StoreError”</span></a></div>
+<p>Thrown as <code dir="auto">StoreException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">KeyInvalid</code></td>
+<td>Store key “{key}” is invalid; expected a letter or digit, then up to 127 letters, digits, “.”, “_”, “:” or “-”.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ValueNotEncodable</code></td>
+<td>The value for key “{key}” is not JSON-encodable: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ValueNotAMap</code></td>
+<td>{class}::toStorage() returned a list for key “{key}”; expected a map of named fields.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">NotConfigured</code></td>
+<td>Persistence is not configured; set persistence.url in stewart.yaml or STEWART_PERSISTENCE__URL in .env.</td>
+<td>Set <code dir="auto">STEWART_PERSISTENCE__URL</code>.</td>
+</tr>
+<tr>
+<td><code dir="auto">Unreachable</code></td>
+<td>The store at {target} is unreachable: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">Refused</code></td>
+<td>The store at {target} refused the operation: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">TimedOut</code></td>
+<td>The store at {target} did not answer within {timeout}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">RecentlyFailed</code></td>
+<td>The store at {target} failed moments ago and is not being retried yet: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">TypeMismatch</code></td>
+<td>Key “{key}” holds {actual}, not {expected}.</td>
+<td>Read the key with the type it was written with, or delete it.</td>
+</tr>
+<tr>
+<td><code dir="auto">NotIncrementable</code></td>
+<td>Key “{key}” cannot be incremented: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ValueNotIncrementable</code></td>
+<td>The stored value cannot be incremented: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ValueMalformed</code></td>
+<td>Key “{key}” does not hold valid JSON: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ValueRejected</code></td>
+<td>{class}::fromStorage() rejected the value of key “{key}” (handle the old shape or delete the key): {cause}</td>
+<td>Make <code dir="auto">fromStorage()</code> accept the stored shape, or delete the key.</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="sunerror">SunError</h2><a class="sl-anchor-link" href="#sunerror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “SunError”</span></a></div>
+<p>Thrown as <code dir="auto">SunException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">CoordinateOutOfRange</code></td>
+<td>The {coordinate} {value} is outside -{limit} to {limit}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">LocationUnknown</code></td>
+<td>Home Assistant reported no location, so sun times are unknown.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="timeerror">TimeError</h2><a class="sl-anchor-link" href="#timeerror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “TimeError”</span></a></div>
+<p>Thrown as <code dir="auto">TimeException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">DurationNegative</code></td>
+<td>Duration {microseconds}us is negative.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">DurationNotFinite</code></td>
+<td>Duration {amount} is not a finite number.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">DurationNotPositive</code></td>
+<td>The duration for {usage} must be at least 1ms.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">DurationTooLarge</code></td>
+<td>Duration exceeds the 292-year maximum.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">DurationUnparsable</code></td>
+<td>Duration “{text}” is invalid; expected a number and one unit, such as 500ms, 5s, 2m or 1h.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">InstantUnparsable</code></td>
+<td>Instant “{text}” is not ISO-8601.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="topicerror">TopicError</h2><a class="sl-anchor-link" href="#topicerror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “TopicError”</span></a></div>
+<p>Thrown as <code dir="auto">TopicException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">PayloadInvalid</code></td>
+<td>Topic payload at {path} is {actualType}; expected null, a finite scalar or an array of those.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">PublishFailed</code></td>
+<td>Could not publish to topic {topic}: {cause}</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="triggererror">TriggerError</h2><a class="sl-anchor-link" href="#triggererror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “TriggerError”</span></a></div>
+<p>Thrown as <code dir="auto">TriggerException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">ConfigInvalid</code></td>
+<td>A Home Assistant trigger must be a map with a non-empty “trigger” or “platform” key.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ConfigUnencodable</code></td>
+<td>Trigger value at {path} cannot be encoded as JSON.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ListEmpty</code></td>
+<td>A trigger subscription needs at least one trigger.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">TimeInvalid</code></td>
+<td>Trigger time “{time}” is neither HH:MM[:SS] nor an input_datetime or sensor entity.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">TimePatternEmpty</code></td>
+<td>A time pattern trigger needs hours, minutes or seconds.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">TemplateEmpty</code></td>
+<td>A template trigger needs a non-empty template.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ZoneInvalid</code></td>
+<td>Trigger zone “{zone}” is not a zone entity.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">VariablesNotMap</code></td>
+<td>Trigger variables must be a map keyed by variable name.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="waiterror">WaitError</h2><a class="sl-anchor-link" href="#waiterror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “WaitError”</span></a></div>
+<p>Thrown as <code dir="auto">WaitException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">Abandoned</code></td>
+<td>The wait ended before an event arrived, because its stream completed or its app stopped.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="mqttclienterror">MqttClientError</h2><a class="sl-anchor-link" href="#mqttclienterror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “MqttClientError”</span></a></div>
+<p>Thrown as <code dir="auto">MqttClientException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">ConnectionRefused</code></td>
+<td>The MQTT server refused the connection: {refusal}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ConnectionLost</code></td>
+<td>The MQTT connection was lost: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ConnectionClosed</code></td>
+<td>The MQTT connection is closed.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">KeepaliveTimedOut</code></td>
+<td>The MQTT server left a keepalive ping unanswered for {keepalive}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">PacketMalformed</code></td>
+<td>The MQTT server sent a malformed {packetType} packet.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">PacketUnexpected</code></td>
+<td>The MQTT server sent an unexpected {packetType} packet.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">PacketIdsExhausted</code></td>
+<td>Every MQTT packet identifier is in flight.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="apperror">AppError</h2><a class="sl-anchor-link" href="#apperror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “AppError”</span></a></div>
+<p>Thrown as <code dir="auto">AppException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">DuplicateId</code></td>
+<td>Automations {firstClass} and {secondClass} both use ID “{appId}”; “-” and “_” count as the same character.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">DirectoryNotAutoloadable</code></td>
+<td>{directory} is not covered by a PSR-4 autoload rule. Add it to “autoload” in composer.json and run <code dir="auto">make install</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">NotAnApp</code></td>
+<td>{className} has #[Automation] but does not implement {appInterface}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">NotInstantiable</code></td>
+<td>{className} has #[Automation] but cannot be instantiated.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">IdInvalid</code></td>
+<td>{className}: automation ID “{appId}” is invalid; use lowercase letters, digits, “-” and “_”, starting with a letter.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">InitializeTimedOut</code></td>
+<td>{appId} initialize() did not return within {timeout}. Raise supervision.initialize_timeout if needed.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">Unknown</code></td>
+<td>No automation with ID “{appId}”.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">Disabled</code></td>
+<td>Automation “{appId}” is not loaded because apps.{appId}.enabled is false.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="brokererror">BrokerError</h2><a class="sl-anchor-link" href="#brokererror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “BrokerError”</span></a></div>
+<p>Thrown as <code dir="auto">BrokerException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">NoWorkersStarted</code></td>
+<td>None of {workers} workers could be started.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">WorkerSpawnTimedOut</code></td>
+<td>Worker {worker} did not connect within {timeout}.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="configurationerror">ConfigurationError</h2><a class="sl-anchor-link" href="#configurationerror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “ConfigurationError”</span></a></div>
+<p>Thrown as <code dir="auto">ConfigurationException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">SchemaViolation</code></td>
+<td>{cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ConfigFileMissing</code></td>
+<td>Config file {path} not found.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ConfigFileUnparsable</code></td>
+<td>Could not parse {path}: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ConfigFileNotAMap</code></td>
+<td>{path} holds {actualType}; expected a map of settings.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ValueInvalid</code></td>
+<td>“{value}” is not {expected}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">KeyInvalid</code></td>
+<td>{path} must be {expected}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">KeyParseFailed</code></td>
+<td>{path} is invalid: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">DurationTooShort</code></td>
+<td>{path} is {value}; expected at least {minimum}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">DurationTooLong</code></td>
+<td>{path} is {value}; expected at most {maximum}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">MaxDelayBelowInitialDelay</code></td>
+<td>{path} is {value}; expected at least {initialDelayPath} ({initialDelay}).</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">RestartWindowTooShort</code></td>
+<td>supervision.restart_window is {window}, but the backoff for restart_attempts ({attempts}) adds up to {backoffTotal}, so a crash-looping worker is never quarantined.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">HomeAssistantMissing</code></td>
+<td>home_assistant is not configured. Set STEWART_HOME_ASSISTANT__URL and STEWART_HOME_ASSISTANT__TOKEN.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">PlaceholderUnset</code></td>
+<td>{setting} refers to ${{variable}}, which is not set. Set it or add a default: ${{variable}:-value}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ControlTokenMissing</code></td>
+<td>control.token is required while control.listen is set; set STEWART_CONTROL__TOKEN or set control.listen to “off”.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">AdminTokenMissing</code></td>
+<td>http.admin.token is required while http.admin.listen is set; set STEWART_HTTP__ADMIN__TOKEN or set http.admin.listen to “off”.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">WorkerIndexOutOfRange</code></td>
+<td>App “{appId}” is pinned to worker {worker}, but the highest worker index is {highestIndex}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">AppUnknown</code></td>
+<td>stewart.yaml configures app “{appId}”, but no automation has that ID.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">AppSelectionUnknown</code></td>
+<td>–only names app “{appId}”, but no automation has that ID.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">EnvironmentVariableUnknown</code></td>
+<td>{variable} is not a Stewart setting; run <code dir="auto">stewart config:reference</code> for all options.</td>
+<td>Fix the variable name; keys are joined by two underscores.</td>
+</tr>
+<tr>
+<td><code dir="auto">EnvironmentVariableTooDeep</code></td>
+<td>{variable} is deeper than the configuration; {valuePath} is a value, not a section.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">EnvironmentVariableNamesSection</code></td>
+<td>{variable} names a section; set the keys under it, such as {variable}{separator}KEY.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">EnvironmentValueInvalid</code></td>
+<td>{variable} is “{raw}”; expected {expected}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">EnvironmentValueUnparsable</code></td>
+<td>{variable} is not a valid inline list or map: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">EnvironmentVariableConflict</code></td>
+<td>{variable} and {otherVariable} both set {valuePath}; keep one.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">EnvironmentSecretFileUnreadable</code></td>
+<td>{variable} points to {path}, which cannot be read.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">MqttPackageMissing</code></td>
+<td>mqtt.url is set, but the MQTT client is not installed; run <code dir="auto">composer require stewart-php/mqtt</code>.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="containererror">ContainerError</h2><a class="sl-anchor-link" href="#containererror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “ContainerError”</span></a></div>
+<p>Thrown as <code dir="auto">ContainerException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">ServiceTypeMismatch</code></td>
+<td>Service “{serviceId}” is {actualType}; expected {expectedType}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">BuildFailed</code></td>
+<td>Worker {workerId} failed to build its container: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">AppInServicesFile</code></td>
+<td>services.php defines “{serviceId}” as automation {class}. Configure it in stewart.yaml instead.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">PeerStoreWritable</code></td>
+<td>{class}::__construct() takes ${parameter} with #[PeerStore] as Store; type it ReadableStore.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">PeerStoreAppIdInvalid</code></td>
+<td>{class}::__construct() takes ${parameter} with #[PeerStore]: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">MessageHandlerDuplicated</code></td>
+<td>{firstHandler} and {secondHandler} both handle {messageClass}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">AppOptionInvalid</code></td>
+<td>Option “{option}” of app “{appId}” is “{value}”, which is not a valid {expectedType}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">AppOptionUnknown</code></td>
+<td>App “{appId}” sets option “{option}”, which matches no parameter of {class}::__construct().</td>
+<td>Rename the option in <code dir="auto">stewart.yaml</code> to match a constructor parameter.</td>
+</tr>
+<tr>
+<td><code dir="auto">AppOptionMissing</code></td>
+<td>App “{appId}” needs option “{option}”; {class}::__construct() takes ${option} with no default.</td>
+<td>Set the option, or give the parameter a default.</td>
+</tr>
+<tr>
+<td><code dir="auto">AppOptionAmbiguous</code></td>
+<td>App “{appId}” sets option “{option}”, which matches parameters {parameters} of {class}::__construct(); use the exact name.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">AppOptionRepeated</code></td>
+<td>App “{appId}” sets ${parameter} of {class}::__construct() twice, as options “{firstOption}” and “{secondOption}”.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">AppBuildFailed</code></td>
+<td>App “{appId}” cannot be built: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">AppClassMissing</code></td>
+<td>App “{appId}” names class {class}, which cannot be loaded.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ServicesFileMissing</code></td>
+<td>Services file {path} no longer exists.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="controlerror">ControlError</h2><a class="sl-anchor-link" href="#controlerror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “ControlError”</span></a></div>
+<p>Thrown as <code dir="auto">ControlException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">SocketInUse</code></td>
+<td>Another daemon is already listening on {address}. Stop it or change control.listen.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">SocketUnremovable</code></td>
+<td>Could not remove the stale control socket {path}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">SocketDirectoryNotCreatable</code></td>
+<td>Could not create control socket directory {directory}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">SocketPathNotASocket</code></td>
+<td>The control socket path {path} exists and is not a socket.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">FrameNotJson</code></td>
+<td>Frame is not JSON: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">FrameNotAnObject</code></td>
+<td>Frame is {actualType}; expected a JSON object.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">FrameUnencodable</code></td>
+<td>Could not encode {frameClass}: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">FrameClassUnknown</code></td>
+<td>Unknown frame {frameClass}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">FrameUndecodable</code></td>
+<td>Could not decode the “{frameType}” control frame: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ConfigUnavailable</code></td>
+<td>Could not read control.listen and control.token (pass –address and –token): {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ControlDisabled</code></td>
+<td>The configuration sets control.listen to off; pass –address.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">TokenMissing</code></td>
+<td>No control token; set STEWART_CONTROL__TOKEN or pass –token.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ConnectionRejected</code></td>
+<td>The broker refused the connection: {reason}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">UnexpectedGreeting</code></td>
+<td>The broker sent {frameClass} instead of a welcome.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ProtocolMismatch</code></td>
+<td>Broker speaks control protocol {brokerProtocol}, this client {clientProtocol}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">BrokerHungUp</code></td>
+<td>The broker hung up before the session ended.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">UnexpectedFrame</code></td>
+<td>The broker sent {frameClass} instead of {expectedFrameClass}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">RequestTimedOut</code></td>
+<td>The broker did not answer within {timeout}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">RequestUnexpected</code></td>
+<td>The control session expects a request, not {frameClass}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">RequestFailed</code></td>
+<td>The broker refused the request: {message}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">RequestUnanswerable</code></td>
+<td>The broker could not answer the request: {cause}</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="deployerror">DeployError</h2><a class="sl-anchor-link" href="#deployerror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “DeployError”</span></a></div>
+<p>Thrown as <code dir="auto">DeployException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">CommitIdInvalid</code></td>
+<td>“{value}” is not a commit hash.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">CommandTimedOut</code></td>
+<td>{command} did not finish within {timeout}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">CommandFailed</code></td>
+<td>{command} failed with exit code {exitCode}: {detail}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">PrepareOutputUnexpected</code></td>
+<td>release-prepare printed “{output}” instead of a commit and its state.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="transporterror">TransportError</h2><a class="sl-anchor-link" href="#transporterror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “TransportError”</span></a></div>
+<p>Thrown as <code dir="auto">TransportException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">Closed</code></td>
+<td>Transport is closed.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">SendFailed</code></td>
+<td>Failed to send to peer: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">Unencodable</code></td>
+<td>Could not encode {messageClass} for IPC: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">PeerDisconnected</code></td>
+<td>Peer disconnected: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ReceiveFailed</code></td>
+<td>Failed to receive from peer: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">UnexpectedMessage</code></td>
+<td>Expected a JSON frame, got {actualType}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">UndecodableFrame</code></td>
+<td>Could not decode “{messageType}” frame: {reason}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ProtocolMismatch</code></td>
+<td>Broker speaks IPC protocol {actual}, this worker {expected}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">MessageTypeMissing</code></td>
+<td>No IPC message type is registered for {messageClass}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">MessageTagMissing</code></td>
+<td>IPC message {messageClass} has no #[IpcMessage] attribute.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">MessageTagDuplicated</code></td>
+<td>IPC tag “{tag}” is declared by both {firstClass} and {secondClass}.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="workererror">WorkerError</h2><a class="sl-anchor-link" href="#workererror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “WorkerError”</span></a></div>
+<p>Thrown as <code dir="auto">WorkerException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">Unknown</code></td>
+<td>No worker “{workerId}”; <code dir="auto">stewart status</code> lists the workers.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ShuttingDown</code></td>
+<td>Stewart is shutting down, so worker {workerId} is not restarted.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="storesetuperror">StoreSetupError</h2><a class="sl-anchor-link" href="#storesetuperror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “StoreSetupError”</span></a></div>
+<p>Thrown as <code dir="auto">StoreSetupException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">DsnInvalid</code></td>
+<td>Store URL is invalid ({length} characters); expected a URL like “redis://host:6379/0”.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">SchemeUnsupported</code></td>
+<td>No installed store backend handles “{scheme}://”; installed schemes: {supported}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">UnknownPeerApp</code></td>
+<td>No automation has ID “{appId}”, so its store cannot be opened.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">PrefixInvalid</code></td>
+<td>Store prefix “{prefix}” is invalid; expected a letter or digit, then up to 63 letters, digits, “.”, “_” or “-”.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="jsonshapeerror">JsonShapeError</h2><a class="sl-anchor-link" href="#jsonshapeerror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “JsonShapeError”</span></a></div>
+<p>Thrown as <code dir="auto">JsonShapeException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">WrongType</code></td>
+<td>“{key}” is {actualType}; expected {expected}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">Missing</code></td>
+<td>“{key}” is missing; expected {expected}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">UnexpectedValue</code></td>
+<td>“{key}” is {value}; expected {expected}.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">InstantInvalid</code></td>
+<td>“{key}” is invalid: {cause}</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ObjectRefused</code></td>
+<td>“{key}” was refused: {cause}</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h2"><h2 id="harnesserror">HarnessError</h2><a class="sl-anchor-link" href="#harnesserror"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “HarnessError”</span></a></div>
+<p>Thrown as <code dir="auto">HarnessException</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">AlreadyStarted</code></td>
+<td>The harness already runs {class}; use one harness per app.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">AutomationMissing</code></td>
+<td>{class} has no #[Automation] attribute, so it is not an app.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">NotStarted</code></td>
+<td>No app is running; call startApp() first.</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">OptionMissing</code></td>
+<td>{class}::__construct() needs option “{option}”; pass it to startApp().</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">OptionUnknown</code></td>
+<td>Option “{option}” matches no parameter of {class}::__construct().</td>
+<td></td>
+</tr>
+<tr>
+<td><code dir="auto">ParameterUnresolvable</code></td>
+<td>{class}::__construct() takes ${parameter} as {type}, which the harness has no fake for; pass one with provideService().</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div><footer class="sl-flex astro-ddtxxk7k"><div class="meta sl-flex astro-ddtxxk7k"><a href="https://github.com/stewart-php/stewart/edit/main/docs/user/reference/errors.md" class="sl-flex print:hidden astro-qlekgd3o"><svg aria-hidden="true" class="astro-qlekgd3o astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.2em;"><path d="M22 7.24a1 1 0 0 0-.29-.71l-4.24-4.24a1 1 0 0 0-1.1-.22 1 1 0 0 0-.32.22l-2.83 2.83L2.29 16.05a1 1 0 0 0-.29.71V21a1 1 0 0 0 1 1h4.24a1 1 0 0 0 .76-.29l10.87-10.93L21.71 8c.1-.1.17-.2.22-.33a1 1 0 0 0 0-.24v-.14l.07-.05ZM6.83 20H4v-2.83l9.93-9.93 2.83 2.83L6.83 20ZM18.17 8.66l-2.83-2.83 1.42-1.41 2.82 2.82-1.41 1.42Z"/></svg>Edit page</a></div><div class="pagination-links print:hidden astro-g3wxxdym" dir="ltr"><a href="/docs/reference/cli/" rel="prev" class="astro-g3wxxdym"><span class="link-label sl-flex astro-g3wxxdym"><svg aria-hidden="true" class="astro-g3wxxdym astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg>Previous</span><span class="link-title astro-g3wxxdym">Command reference</span></a><a href="/docs/reference/metrics/" rel="next" class="astro-g3wxxdym"><span class="link-label sl-flex astro-g3wxxdym">Next<svg aria-hidden="true" class="astro-g3wxxdym astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg></span><span class="link-title astro-g3wxxdym">Metrics reference</span></a></div></footer></div></div></main></div></div></div></div></body></html>

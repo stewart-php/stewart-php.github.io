@@ -1,0 +1,603 @@
+<!DOCTYPE html><html lang="en" dir="ltr" data-theme="dark" data-has-toc data-has-sidebar class="astro-g5ptsecz"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Channel protocol | Stewart — Developers</title><link rel="canonical" href="https://stewart-php.github.io/docs-dev/protocol/"/><link rel="sitemap" href="/docs-dev/sitemap-index.xml"/><link rel="shortcut icon" href="/docs-dev/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v7.3.2"/><meta name="generator" content="Starlight v0.42.6"/><meta property="og:title" content="Channel protocol"/><meta property="og:type" content="article"/><meta property="og:url" content="https://stewart-php.github.io/docs-dev/protocol/"/><meta property="og:locale" content="en"/><meta property="og:description" content="The broker-to-worker message set, the sequences that use it, and how it fails."/><meta property="og:site_name" content="Stewart — Developers"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="The broker-to-worker message set, the sequences that use it, and how it fails."/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg><svg aria-hidden="true" class="dark astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg><svg aria-hidden="true" class="auto astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg></template><link rel="stylesheet" href="/docs-dev/_astro/print.ehPL0gv-.css" media="print"><link rel="stylesheet" href="/docs-dev/_astro/common.BhE-JJsQ.css"><script type="module" src="/docs-dev/_astro/page.Dwipeu-R.js"></script></head><body class="astro-g5ptsecz"><a class="sl-skip-link astro-qb7clj6f" href="#_top">Skip to content</a><div class="page sl-flex astro-yntsjkba"><header class="header astro-yntsjkba"><div class="header astro-by6fddyj"><div class="title-wrapper sl-flex astro-by6fddyj"><a href="/docs-dev/" class="site-title sl-flex astro-6rvad3va"><span class="astro-6rvad3va" translate="no">Stewart — Developers</span></a></div><div class="sl-flex print:hidden astro-by6fddyj"><site-search class="astro-by6fddyj astro-b5kgnn7o" data-translations="{&quot;placeholder&quot;:&quot;Search&quot;}"><button data-open-modal disabled aria-label="Search" aria-keyshortcuts="Control+K" class="astro-b5kgnn7o"><svg aria-hidden="true" class="astro-b5kgnn7o astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg><span class="sl-hidden md:sl-block astro-b5kgnn7o" aria-hidden="true">Search</span><kbd class="sl-hidden md:sl-flex astro-b5kgnn7o" style="display: none;"><kbd class="astro-b5kgnn7o">Ctrl</kbd><kbd class="astro-b5kgnn7o">K</kbd></kbd></button><dialog style="padding:0" aria-label="Search" class="astro-b5kgnn7o"><div class="dialog-frame sl-flex astro-b5kgnn7o"><button data-close-modal class="sl-flex md:sl-hidden astro-b5kgnn7o">Cancel</button><div class="search-container astro-b5kgnn7o"><div id="starlight__search" class="astro-b5kgnn7o"></div></div></div></dialog></site-search><script>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script><script type="module" src="/docs-dev/_astro/Search.astro_astro_type_script_index_0_lang.HijIgePq.js"></script></div><div class="sl-hidden md:sl-flex print:hidden right-group astro-by6fddyj"><div class="sl-flex social-icons astro-by6fddyj"><a href="https://github.com/stewart-php" rel="me" class="sl-flex astro-n2mnl6yq"><span class="sr-only astro-n2mnl6yq">GitHub</span><svg aria-hidden="true" class="astro-n2mnl6yq astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-rapide-theme-select class="astro-xgdtbcdp"><button aria-label="Select theme" aria-live="polite" class="sl-flex astro-xgdtbcdp" title="Select theme"><svg aria-hidden="true" height="16" viewBox="0 0 24 24" width="16" class="astro-xgdtbcdp"><mask class="moon astro-xgdtbcdp" id="moon-mask-70952441"><rect x="0" y="0" width="100%" height="100%" fill="white" class="astro-xgdtbcdp"></rect><circle cx="24" cy="10" r="6" fill="black" class="astro-xgdtbcdp"></circle></mask><circle class="sun astro-xgdtbcdp" cx="12" cy="12" r="6" mask="url(#moon-mask-70952441)"></circle><g class="sun-beams astro-xgdtbcdp" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="3" class="astro-xgdtbcdp"></line><line x1="12" y1="21" x2="12" y2="23" class="astro-xgdtbcdp"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" class="astro-xgdtbcdp"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" class="astro-xgdtbcdp"></line><line x1="1" y1="12" x2="3" y2="12" class="astro-xgdtbcdp"></line><line x1="21" y1="12" x2="23" y2="12" class="astro-xgdtbcdp"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" class="astro-xgdtbcdp"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" class="astro-xgdtbcdp"></line></g></svg></button></starlight-rapide-theme-select><script>
+  StarlightThemeProvider.updatePickers()
+</script><script type="module">var e=`starlight-theme`;function t(e){return e===`auto`||e===`dark`||e===`light`?e:`auto`}function n(){return t(typeof localStorage<`u`&&localStorage.getItem(e))}function r(t){typeof localStorage<`u`&&localStorage.setItem(e,t===`light`||t===`dark`?t:``)}function i(){return matchMedia(`(prefers-color-scheme: light)`).matches?`light`:`dark`}function a(e){StarlightThemeProvider.updatePickers(e),document.documentElement.dataset.theme=e===`auto`?i():e,r(e)}matchMedia(`(prefers-color-scheme: light)`).addEventListener(`change`,()=>{n()===`auto`&&a(`auto`)}),customElements.define(`starlight-rapide-theme-select`,class extends HTMLElement{constructor(){super(),a(n());let e=this.querySelector(`button`);e?.addEventListener(`click`,()=>{let n=t(document.documentElement.dataset.theme),r=n===`dark`?`light`:n===`light`?`dark`:`auto`;a(r),e?.setAttribute(`aria-label`,`${r} theme`)})}});</script></div></div></header><nav class="sidebar print:hidden astro-yntsjkba" aria-label="Main"><button popovertarget="starlight__sidebar" class="sl-menu-button sl-flex md:sl-hidden print:hidden astro-r2osgdlg"><svg aria-hidden="true" class="open-menu astro-r2osgdlg astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg><svg aria-hidden="true" class="close-menu astro-r2osgdlg astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg><span class="sr-only astro-r2osgdlg">Menu</span></button><script type="module">var e=class extends HTMLElement{constructor(){super();let e=matchMedia(`(min-width: 50em)`),t=()=>{this.popover=e.matches?null:`auto`};t(),e.addEventListener(`change`,()=>t()),this.addEventListener(`toggle`,({newState:e})=>this.trapFocus(e===`open`))}trapFocus(e){document.querySelectorAll(`.main-frame, .sl-skip-link`).forEach(t=>{t.toggleAttribute(`inert`,e)})}};customElements.define(`sl-sidebar-pane`,e);</script><sl-sidebar-pane popover id="starlight__sidebar" class="sidebar-pane astro-yntsjkba"><div class="sidebar-content sl-flex astro-yntsjkba"><sl-sidebar-state-persist data-hash="1u3q2gp" class="astro-ipdry5cl"><script aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script><ul class="top-level astro-rmhv4bp6"><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Contributing</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="0"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/docs-dev/contributing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Contributing</span></a></li><li class="astro-rmhv4bp6"><a href="/docs-dev/conventions/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Conventions</span></a></li><li class="astro-rmhv4bp6"><a href="/docs-dev/testing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Testing</span></a></li><li class="astro-rmhv4bp6"><a href="/docs-dev/releasing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Releasing</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Internals</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="1"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/docs-dev/architecture/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Architecture</span></a></li><li class="astro-rmhv4bp6"><a href="/docs-dev/protocol/" aria-current="page" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Channel protocol</span></a></li><li class="astro-rmhv4bp6"><a href="/docs-dev/control-protocol/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Control protocol</span></a></li><li class="astro-rmhv4bp6"><a href="/docs-dev/component-protocol/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Component protocol</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Code walkthrough</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="2"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/docs-dev/walkthrough/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Code walkthrough</span></a></li><li class="astro-rmhv4bp6"><a href="/docs-dev/walkthrough/console/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Console and configuration</span></a></li><li class="astro-rmhv4bp6"><a href="/docs-dev/walkthrough/broker/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">The broker</span></a></li><li class="astro-rmhv4bp6"><a href="/docs-dev/walkthrough/worker/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">The worker</span></a></li><li class="astro-rmhv4bp6"><a href="/docs-dev/walkthrough/client/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Client and testing</span></a></li></ul></details></li></ul><script aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script></sl-sidebar-state-persist><div class="md:sl-hidden"><div class="mobile-preferences sl-flex astro-p4azlveh"><div class="social-icons astro-p4azlveh"><a href="https://github.com/stewart-php" rel="me" class="sl-flex astro-n2mnl6yq"><span class="sr-only astro-n2mnl6yq">GitHub</span><svg aria-hidden="true" class="astro-n2mnl6yq astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-rapide-theme-select class="astro-xgdtbcdp"><button aria-label="Select theme" aria-live="polite" class="sl-flex astro-xgdtbcdp" title="Select theme"><svg aria-hidden="true" height="16" viewBox="0 0 24 24" width="16" class="astro-xgdtbcdp"><mask class="moon astro-xgdtbcdp" id="moon-mask-0f987750"><rect x="0" y="0" width="100%" height="100%" fill="white" class="astro-xgdtbcdp"></rect><circle cx="24" cy="10" r="6" fill="black" class="astro-xgdtbcdp"></circle></mask><circle class="sun astro-xgdtbcdp" cx="12" cy="12" r="6" mask="url(#moon-mask-0f987750)"></circle><g class="sun-beams astro-xgdtbcdp" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="3" class="astro-xgdtbcdp"></line><line x1="12" y1="21" x2="12" y2="23" class="astro-xgdtbcdp"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" class="astro-xgdtbcdp"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" class="astro-xgdtbcdp"></line><line x1="1" y1="12" x2="3" y2="12" class="astro-xgdtbcdp"></line><line x1="21" y1="12" x2="23" y2="12" class="astro-xgdtbcdp"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" class="astro-xgdtbcdp"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" class="astro-xgdtbcdp"></line></g></svg></button></starlight-rapide-theme-select><script>
+  StarlightThemeProvider.updatePickers()
+</script></div></div></div></sl-sidebar-pane></nav><div class="main-frame astro-yntsjkba"><script type="module">var e=document.getElementById(`starlight__sidebar`),t=e?.querySelector(`sl-sidebar-state-persist`),n=`sl-sidebar-state`,r=()=>{let r=[],i=t?.dataset.hash||``;try{let e=sessionStorage.getItem(n),t=JSON.parse(e||`{}`);Array.isArray(t.open)&&t.hash===i&&(r=t.open)}catch{}return{hash:i,open:r,scroll:e?.scrollTop||0}},i=e=>{try{sessionStorage.setItem(n,JSON.stringify(e))}catch{}},a=()=>i(r()),o=(e,t)=>{let n=r();n.open[t]=e,i(n)};t?.addEventListener(`click`,e=>{if(!(e.target instanceof Element))return;let t=e.target.closest(`summary`)?.closest(`details`);if(!t)return;let n=t.querySelector(`sl-sidebar-restore`),r=parseInt(n?.dataset.index||``);isNaN(r)||o(!t.open,r)}),addEventListener(`visibilitychange`,()=>{document.visibilityState===`hidden`&&a()});</script><div class="lg:sl-flex astro-lrzkfocr"><aside class="right-sidebar-container print:hidden astro-lrzkfocr"><div class="right-sidebar astro-lrzkfocr"><div class="lg:sl-hidden astro-qok35upx"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-66cqc7ze"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-66cqc7ze"><details id="starlight__mobile-toc" class="astro-66cqc7ze"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-66cqc7ze"><span class="toggle sl-flex astro-66cqc7ze">On this page<svg aria-hidden="true" class="caret astro-66cqc7ze astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></span><span class="display-current astro-66cqc7ze"></span></summary><div class="dropdown astro-66cqc7ze"><ul class="isMobile astro-jugkfwgx" style="--depth: 0;"><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#_top" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Overview</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#the-wire" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">The wire</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#the-message-set" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">The message set</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#broker--worker" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Broker → Worker</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#worker--broker" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Worker → Broker</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#status" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Status</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#boot" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Boot</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#a-state-change" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">A state change</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#a-service-call" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">A service call</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#a-history-query" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">A history query</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#app-to-app-messaging" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">App-to-app messaging</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#mqtt" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">MQTT</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#triggers" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Triggers</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#shutdown" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Shutdown</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#backpressure" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Backpressure</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#reconnect" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Reconnect</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#failure-modes" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Failure modes</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#testing-it" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Testing it</span></a></li></ul></div></details></nav></mobile-starlight-toc><script type="module" src="/docs-dev/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.C3fM4Kra.js"></script></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-qok35upx"><div class="sl-container astro-qok35upx"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">On this page</h2><ul class="astro-jugkfwgx" style="--depth: 0;"><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#_top" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Overview</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#the-wire" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">The wire</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#the-message-set" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">The message set</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#broker--worker" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Broker → Worker</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#worker--broker" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Worker → Broker</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#status" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Status</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#boot" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Boot</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#a-state-change" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">A state change</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#a-service-call" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">A service call</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#a-history-query" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">A history query</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#app-to-app-messaging" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">App-to-app messaging</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#mqtt" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">MQTT</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#triggers" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Triggers</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#shutdown" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Shutdown</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#backpressure" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Backpressure</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#reconnect" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Reconnect</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#failure-modes" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Failure modes</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#testing-it" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Testing it</span></a></li></ul></nav></starlight-toc><script type="module" src="/docs-dev/_astro/TableOfContents.astro_astro_type_script_index_0_lang.BpJaGz7G.js"></script></div></div></div></aside><div class="main-pane astro-lrzkfocr"><main data-pagefind-body class="astro-g5ptsecz" lang="en" dir="ltr"><div class="content-panel astro-a7po4psb"><div class="sl-container astro-a7po4psb"><h1 id="_top" class="astro-bebwqqxs">Channel protocol</h1></div></div><div class="content-panel astro-a7po4psb"><div class="sl-container astro-a7po4psb"><div class="sl-markdown-content"><p>What travels between the broker and a worker, and the sequences that use it.
+Read <a href="/docs-dev/architecture/">Architecture</a> first for the shape this sits inside.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="the-wire">The wire</h2><a class="sl-anchor-link" href="#the-wire"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The wire”</span></a></div>
+<p>Messages are <code dir="auto">final readonly</code> PHP objects in <code dir="auto">Ipc\Message</code>. Each one crosses
+the <code dir="auto">amphp/parallel</code> channel as one JSON frame:</p>
+<div class="expressive-code"><link rel="stylesheet" href="/docs-dev/_astro/ec.zh6mu.css"><script type="module" src="/docs-dev/_astro/ec.0vx5m.js"></script><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="json"><code><div class="ec-line"><div class="code"><span style="--0:#8B8B8B;--1:#686868">{</span><span style="--0:#B8A965CD;--1:#786713FD">"</span><span style="--0:#B8A965;--1:#786713">t</span><span style="--0:#B8A965CD;--1:#786713FD">"</span><span style="--0:#8B8B8B;--1:#686868">:</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#C98A7DE4;--1:#96574AFD">"</span><span style="--0:#C98A7D;--1:#96574A">subscribe</span><span style="--0:#C98A7DE4;--1:#96574AFD">"</span><span style="--0:#8B8B8B;--1:#686868">,</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#B8A965CD;--1:#786713FD">"</span><span style="--0:#B8A965;--1:#786713">m</span><span style="--0:#B8A965CD;--1:#786713FD">"</span><span style="--0:#8B8B8B;--1:#686868">:</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#8B8B8B;--1:#686868">{</span><span style="--0:#B8A965CD;--1:#786713FD">"</span><span style="--0:#B8A965;--1:#786713">subscription_id</span><span style="--0:#B8A965CD;--1:#786713FD">"</span><span style="--0:#8B8B8B;--1:#686868">:</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#C98A7DE4;--1:#96574AFD">"</span><span style="--0:#C98A7D;--1:#96574A">w0:3</span><span style="--0:#C98A7DE4;--1:#96574AFD">"</span><span style="--0:#8B8B8B;--1:#686868">,</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#B8A965CD;--1:#786713FD">"</span><span style="--0:#B8A965;--1:#786713">app_id</span><span style="--0:#B8A965CD;--1:#786713FD">"</span><span style="--0:#8B8B8B;--1:#686868">:</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#C98A7DE4;--1:#96574AFD">"</span><span style="--0:#C98A7D;--1:#96574A">demo</span><span style="--0:#C98A7DE4;--1:#96574AFD">"</span><span style="--0:#8B8B8B;--1:#686868">,</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#B8A965CD;--1:#786713FD">"</span><span style="--0:#B8A965;--1:#786713">kind</span><span style="--0:#B8A965CD;--1:#786713FD">"</span><span style="--0:#8B8B8B;--1:#686868">:</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#C98A7DE4;--1:#96574AFD">"</span><span style="--0:#C98A7D;--1:#96574A">event</span><span style="--0:#C98A7DE4;--1:#96574AFD">"</span><span style="--0:#8B8B8B;--1:#686868">,</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#B8A965CD;--1:#786713FD">"</span><span style="--0:#B8A965;--1:#786713">selector</span><span style="--0:#B8A965CD;--1:#786713FD">"</span><span style="--0:#8B8B8B;--1:#686868">:</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#8B8B8B;--1:#686868">{</span><span style="--0:#B8A965CD;--1:#786713FD">"</span><span style="--0:#B8A965;--1:#786713">kind</span><span style="--0:#B8A965CD;--1:#786713FD">"</span><span style="--0:#8B8B8B;--1:#686868">:</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#C98A7DE4;--1:#96574AFD">"</span><span style="--0:#C98A7D;--1:#96574A">exact</span><span style="--0:#C98A7DE4;--1:#96574AFD">"</span><span style="--0:#8B8B8B;--1:#686868">,</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#B8A965CD;--1:#786713FD">"</span><span style="--0:#B8A965;--1:#786713">value</span><span style="--0:#B8A965CD;--1:#786713FD">"</span><span style="--0:#8B8B8B;--1:#686868">:</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#C98A7DE4;--1:#96574AFD">"</span><span style="--0:#C98A7D;--1:#96574A">zha_event</span><span style="--0:#C98A7DE4;--1:#96574AFD">"</span><span style="--0:#8B8B8B;--1:#686868">}}}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="{&quot;t&quot;: &quot;subscribe&quot;, &quot;m&quot;: {&quot;subscription_id&quot;: &quot;w0:3&quot;, &quot;app_id&quot;: &quot;demo&quot;, &quot;kind&quot;: &quot;event&quot;, &quot;selector&quot;: {&quot;kind&quot;: &quot;exact&quot;, &quot;value&quot;: &quot;zha_event&quot;}}}"><div></div></button></div></figure></div>
+<p><code dir="auto">t</code> is the tag <code dir="auto">IpcCodec::TAGS</code> assigns to the message class it
+carries. <code dir="auto">m</code> is the message as <code dir="auto">WireMapper</code> writes it. Each key is the
+snake_case of a constructor property, and instants and durations are integer
+microseconds under a <code dir="auto">_us</code> key (<code dir="auto">lost_at_us</code>, <code dir="auto">grace_us</code>). <code dir="auto">IpcCodec</code> refuses a
+message class that has no tag. <code dir="auto">ProcessContext</code> still wraps each frame string in
+<code dir="auto">serialize()</code>, because it hard-wires <code dir="auto">NativeSerializer</code>. What reaches
+<code dir="auto">serialize()</code> is a string, never an object graph.</p>
+<p>State is encoded once for every worker.
+<code dir="auto">StateSnapshot</code>, <code dir="auto">StateResynced</code> and <code dir="auto">StateChangeBatch</code> hold <code dir="auto">EntityStatesFragment</code> and
+<code dir="auto">StateChangesFragment</code> fragments, which cache their JSON on the broker. The frame
+splices that JSON in unescaped. On the worker, the same classes hold the decoded
+lists.</p>
+<p>The vocabulary belongs to the wire. A message may use only contracts, the
+<code dir="auto">Runtime\Model</code> enums and DTOs, and <code dir="auto">Ipc</code> types such as <code dir="auto">WorkerApp</code>,
+<code dir="auto">WorkerSettings</code> and <code dir="auto">StoreSettings</code>. A phpat rule enforces
+this, so changing a config value object is never a protocol change.</p>
+<p>The rules that follow:</p>
+<ul>
+<li><strong><code dir="auto">Bootstrap</code> carries the protocol version.</strong> A worker whose
+<code dir="auto">IpcCodec::PROTOCOL_VERSION</code> differs stops with <code dir="auto">TransportError::ProtocolMismatch</code>
+before it reads anything else. Any change to a message’s shape bumps it; the IPC
+goldens fail until it does.</li>
+<li><strong>A frame that cannot be decoded is dropped.</strong> The reader logs its tag and
+carries on. An undecodable <code dir="auto">Bootstrap</code> stops the worker.</li>
+<li><strong>Selectors are one closed type.</strong> <code dir="auto">Selector</code> is a final value object whose
+kind is exact, glob, regex or any-of, and <code dir="auto">*</code> crosses as <code dir="auto">any</code>. A string
+becomes a glob when it has <code dir="auto">*</code> or <code dir="auto">?</code>, and an exact match otherwise; a regex
+is only ever built with <code dir="auto">Selector::regex()</code>.</li>
+<li><strong>Payloads must be JSON.</strong> Topic payloads refuse objects and non-finite
+floats up front. Service data that cannot be encoded fails the call as
+<code dir="auto">Rejected</code>.</li>
+<li><strong>Log context is flattened before it is sent,</strong> and <strong>a <code dir="auto">Throwable</code> is never
+sent as itself.</strong> <code dir="auto">AppFailed</code> carries a flattened trace and the
+<code dir="auto">ExceptionDetails</code> of a Stewart exception: <code dir="auto">{class, reason, context}</code>, with
+the reason as its enum value.</li>
+</ul>
+<p>Sends are drained one at a time in a single fiber per worker. That is what keeps
+channel writes ordered and stops a large snapshot interleaving with the events
+queued behind it.</p>
+<p>The <code dir="auto">Ping</code>/<code dir="auto">Pong</code> loop-lag figure assumes <strong>both processes share a clock</strong> —
+true because they are the same host by construction. The delay between the
+broker stamping a ping and the worker answering is then a usable proxy for how
+backed up that worker’s event loop is.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="the-message-set">The message set</h2><a class="sl-anchor-link" href="#the-message-set"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The message set”</span></a></div>
+<p><img alt="Protocol" loading="lazy" decoding="async" width="4132" height="488" src="/docs-dev/_astro/05-protocol.Cvxl4EiV_Z2aeg6U.svg"></p>
+<p>Forty-one messages, closed by the <code dir="auto">BrokerMessage</code>, <code dir="auto">CorrelatedReply</code> and
+<code dir="auto">WorkerMessage</code> marker interfaces and by the <code dir="auto">IpcCodec::TAGS</code> tags.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="broker--worker">Broker → Worker</h3><a class="sl-anchor-link" href="#broker--worker"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Broker → Worker”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Message</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">Bootstrap</code></td>
+<td>The protocol version, identity, timezone, Home Assistant’s location (behind <code dir="auto">SunCalendar</code>), the app list, the worker settings (log level, call and initialize timeouts, subscription buffer, where <code dir="auto">services.php</code> is, the generated namespace), the store settings, every discovered automation’s ID and the Home Assistant user the token belongs to (behind <code dir="auto">HaContext::wasCausedByStewart()</code>). First message a worker sees.</td>
+</tr>
+<tr>
+<td><code dir="auto">RegistrySnapshot</code></td>
+<td>Home Assistant’s areas, floors, labels, devices and entity registry with a revision, <strong>encoded once</strong> (<code dir="auto">RegistryFragment</code>). Sent before <code dir="auto">StateSnapshot</code> to a new worker, before <code dir="auto">StateResynced</code> after a reconnect, and to every live worker after a registry refresh. The worker keeps the highest revision.</td>
+</tr>
+<tr>
+<td><code dir="auto">StateSnapshot</code></td>
+<td>Whole-world state, <strong>encoded once</strong> and shared by every worker (<code dir="auto">EntityStatesFragment</code>). Also means “you are new: initialize your apps”.</td>
+</tr>
+<tr>
+<td><code dir="auto">HaConnectionLost</code></td>
+<td>Home Assistant is gone, with the moment and the reason. Service calls now fail in the worker, and apps hear <code dir="auto">ConnectionLost</code>. Also sent right after <code dir="auto">StateSnapshot</code> to a worker bootstrapped during an outage.</td>
+</tr>
+<tr>
+<td><code dir="auto">StateResynced</code></td>
+<td>The rebuilt snapshot after a reconnect. The worker diffs it against its state cache, replays the differences as reconstructed state changes, then tells apps <code dir="auto">ConnectionRestored</code>. Nothing is initialized again.</td>
+</tr>
+<tr>
+<td><code dir="auto">StateChangeBatch</code></td>
+<td>One or more state changes, in order, each encoded once (<code dir="auto">StateChangesFragment</code>). Sent to every live worker; each matches them against its own subscriptions.</td>
+</tr>
+<tr>
+<td><code dir="auto">EventFired</code></td>
+<td>Any other Home Assistant event — <code dir="auto">zha_event</code>, a custom one — plus the subscription IDs that matched. Sent only to workers that asked.</td>
+</tr>
+<tr>
+<td><code dir="auto">ServiceCallResult</code></td>
+<td>Answer to a <code dir="auto">ServiceCallRequest</code>, with the call’s <code dir="auto">EventContext</code> (<code dir="auto">dry-run:…</code> under dry run). Always sent, success or not.</td>
+</tr>
+<tr>
+<td><code dir="auto">EventFireResult</code></td>
+<td>Answer to an <code dir="auto">EventFireRequest</code>, with the fired event’s <code dir="auto">EventContext</code>.</td>
+</tr>
+<tr>
+<td><code dir="auto">HistoryResult</code></td>
+<td>Answer to a <code dir="auto">HistoryRequest</code>: the entity’s recorded states, oldest first.</td>
+</tr>
+<tr>
+<td><code dir="auto">RequestFailed</code></td>
+<td>The failure answer to any correlated request: a service call, event fire, history query, registry edit or exposure. It carries the exception class, reason and context, and the worker rebuilds the exception the request expects. <code dir="auto">Overloaded</code> means the broker refused the call because <code dir="auto">service_calls.max_in_flight[_per_worker]</code> is already reached.</td>
+</tr>
+<tr>
+<td><code dir="auto">TopicMessage</code></td>
+<td>An app-to-app message, routed.</td>
+</tr>
+<tr>
+<td><code dir="auto">MqttMessageDelivery</code></td>
+<td>A message from the MQTT server, with the subscription IDs whose filter matched its topic. Droppable, like <code dir="auto">TopicMessage</code>.</td>
+</tr>
+<tr>
+<td><code dir="auto">TriggerFired</code></td>
+<td>A Home Assistant trigger fired (<code dir="auto">TriggerEvent</code>), with the subscription IDs that share its spec. Droppable, like <code dir="auto">EventFired</code>.</td>
+</tr>
+<tr>
+<td><code dir="auto">SubscriptionAck</code></td>
+<td>Confirms a registration, or says why it was refused. For a trigger, a refusal can also arrive later, when Home Assistant rejects the config. A refused subscription is cancelled in the worker.</td>
+</tr>
+<tr>
+<td><code dir="auto">PausedAppsChanged</code></td>
+<td>The full set of paused apps, after a pause, resume or reset. Plain delivery, so it never overtakes deliveries queued before it. <code dir="auto">Bootstrap</code> carries the same set at start.</td>
+</tr>
+<tr>
+<td><code dir="auto">ExposedEntityCommanded</code></td>
+<td>Someone used an exposed entity in Home Assistant; the owning worker runs the app’s command handlers and answers with <code dir="auto">ExposedCommandAnswered</code>.</td>
+</tr>
+<tr>
+<td><code dir="auto">ExposedEntitySynced</code></td>
+<td>Home Assistant reported an exposed entity’s registry or restored state; the owning worker updates its handle.</td>
+</tr>
+<tr>
+<td><code dir="auto">ExposeEntityResult</code>, <code dir="auto">ExposureAcknowledged</code></td>
+<td>Answers to <code dir="auto">ExposeEntityRequest</code> (with the restored snapshot) and to the other exposure requests.</td>
+</tr>
+<tr>
+<td><code dir="auto">RegistryEntityUpdateResult</code></td>
+<td>Answer to a <code dir="auto">RegistryEntityUpdateRequest</code>: the entry Home Assistant stored.</td>
+</tr>
+<tr>
+<td><code dir="auto">Shutdown</code></td>
+<td>Dispose apps and return.</td>
+</tr>
+<tr>
+<td><code dir="auto">Ping</code></td>
+<td>Liveness and loop-lag probe.</td>
+</tr>
+</tbody>
+</table>
+<div class="sl-heading-wrapper level-h3"><h3 id="worker--broker">Worker → Broker</h3><a class="sl-anchor-link" href="#worker--broker"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Worker → Broker”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>Message</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code dir="auto">Subscribe</code> / <code dir="auto">Unsubscribe</code></td>
+<td>Register or drop interest in Home Assistant events or topics, carrying a <code dir="auto">Selector</code>. State and connection subscriptions never cross: the worker matches them itself.</td>
+</tr>
+<tr>
+<td><code dir="auto">SubscribeTrigger</code></td>
+<td>Register interest in a Home Assistant trigger, carrying the <code dir="auto">TriggerSpec</code> (trigger configs and variables). Dropped with the same <code dir="auto">Unsubscribe</code>.</td>
+</tr>
+<tr>
+<td><code dir="auto">WorkerReady</code></td>
+<td>Every app constructed, initialized and subscribed. Never sent once the worker is stopping, and the broker’s <code dir="auto">supervision.ready_timeout</code> restarts a worker that never sends it.</td>
+</tr>
+<tr>
+<td><code dir="auto">ServiceCallRequest</code></td>
+<td>An app wants Home Assistant to do something.</td>
+</tr>
+<tr>
+<td><code dir="auto">EventFireRequest</code></td>
+<td>An app fires an event on Home Assistant’s bus.</td>
+</tr>
+<tr>
+<td><code dir="auto">HistoryRequest</code></td>
+<td>An app wants one entity’s recorded states over a fixed window.</td>
+</tr>
+<tr>
+<td><code dir="auto">Publish</code></td>
+<td>An app-to-app message on its way to routing.</td>
+</tr>
+<tr>
+<td><code dir="auto">MqttPublish</code></td>
+<td>A message for the MQTT server, with the publishing app’s scope.</td>
+</tr>
+<tr>
+<td><code dir="auto">ExposeEntityRequest</code>, <code dir="auto">UpdateExposedEntityRequest</code>, <code dir="auto">ReconfigureExposedEntityRequest</code>, <code dir="auto">RemoveExposedEntityRequest</code></td>
+<td>An app exposes an entity, changes its state, replaces its configuration, or removes it. Correlated like a service call.</td>
+</tr>
+<tr>
+<td><code dir="auto">ExposuresReleased</code></td>
+<td>An app stopped; the broker marks its exposed entities unavailable.</td>
+</tr>
+<tr>
+<td><code dir="auto">ExposedCommandAnswered</code></td>
+<td>The app accepted or rejected a command, by its command ID.</td>
+</tr>
+<tr>
+<td><code dir="auto">RegistryEntityUpdateRequest</code></td>
+<td>An app edits an entity registry entry through <code dir="auto">RegistryEditor</code>.</td>
+</tr>
+<tr>
+<td><code dir="auto">AppFailed</code></td>
+<td>An app threw, with the phase and a flattened trace.</td>
+</tr>
+<tr>
+<td><code dir="auto">Pong</code></td>
+<td>Answers <code dir="auto">Ping</code>, carrying the worker’s event-loop lag, memory, one activity report per app (state, subscription and schedule counts, and cumulative delivered, dropped, schedule-run and publish counts) and, when a store is configured, its health as the worker sees it.</td>
+</tr>
+<tr>
+<td><code dir="auto">LogRecord</code></td>
+<td>A log line, to be written by the broker.</td>
+</tr>
+</tbody>
+</table>
+<p><code dir="auto">Bootstrap</code> groups what a worker is told into <code dir="auto">WorkerSettings</code>, with no
+defaults on the wire side, so a configured value always crosses as itself.
+<code dir="auto">logLevel</code> is the worker’s threshold for forwarding records. <code dir="auto">callTimeout</code> is
+<code dir="auto">home_assistant.command_timeout</code> plus a fixed five seconds of IPC headroom, so
+the worker’s timeout is always strictly the outer one. <code dir="auto">initializeTimeout</code> is
+<code dir="auto">supervision.initialize_timeout</code>, and the worker, not the broker, enforces it.
+<code dir="auto">generatedNamespace</code> is <code dir="auto">codegen.namespace</code>, and the worker resolves the two
+generated roots from it with <code dir="auto">class_exists</code>, so a worker with no generated code
+wires nothing. The store’s DSN crosses as a sensitive string, and the worker
+parses it again and resolves the backend from its scheme. With it comes
+<code dir="auto">available</code>, false when the worker starts during a store outage.</p>
+<p><code dir="auto">servicesFile</code> is used too: the worker builds its
+container from it. It travels rather than being derived because a worker cannot
+work it out — its entrypoint path is relative to the runtime package, which sits
+at a different depth under a path repository than under a vendor install.</p>
+<p><code dir="auto">SubscriptionAck</code> exists because a silently-ignored subscription is the worst
+failure mode in an automation system — nothing happening looks exactly like
+nothing needing to happen.</p>
+<p>An event or topic subscription takes effect once the broker has processed its
+<code dir="auto">Subscribe</code>; anything routed before that is not delivered. A state subscription
+takes effect the moment it is registered, because the worker already receives
+every change for its state cache.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="status">Status</h2><a class="sl-anchor-link" href="#status"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Status”</span></a></div>
+<p>The broker learns what apps are doing from the activity reports on each <code dir="auto">Pong</code>, at the
+watchdog’s cadence; nothing else is asked of a worker. Reports carry counts and
+states, never payloads or options. The broker adds each report’s difference from
+the previous one of the same worker, so its per-app totals keep growing across
+restarts.</p>
+<p><code dir="auto">stewart status</code> reads the result over the control socket, described in
+<a href="/docs-dev/control-protocol/">Control protocol</a>.</p>
+<p>A request the broker cannot answer (unknown frame, unknown or disabled app, unknown worker) gets
+<code dir="auto">request_failed</code> with the exception’s reason value. Pausing a paused app, or
+resuming a running one, answers <code dir="auto">changed: false</code>; <code dir="auto">reset_app</code> answers
+<code dir="auto">changed: true</code> when it removed a stored override; <code dir="auto">restart_worker</code> answers
+<code dir="auto">changed: false</code> while the worker is already starting or stopping. <code dir="auto">warning</code> is <code dir="auto">null</code> unless the
+change could not be stored. An app’s <code dir="auto">pause</code> is <code dir="auto">null</code> while it
+runs, otherwise <code dir="auto">since</code> and <code dir="auto">source</code> (<code dir="auto">config</code>, <code dir="auto">control</code> or <code dir="auto">http</code>); a config pause
+holds from daemon start. <code dir="auto">config_pause_override</code> has the same shape and is set
+only while a stored resume beats a config pause. An app’s
+<code dir="auto">state</code> travels by value: <code dir="auto">declared</code>, <code dir="auto">constructing</code>, <code dir="auto">constructed</code>,
+<code dir="auto">initializing</code>, <code dir="auto">initialized</code>, <code dir="auto">running</code>, <code dir="auto">failed</code>, <code dir="auto">skipped</code>, <code dir="auto">disposed</code>,
+<code dir="auto">abandoned</code>, or <code dir="auto">null</code> for an app that has not reported yet. An app’s
+<code dir="auto">last_failure</code> carries <code dir="auto">phase</code>, <code dir="auto">class</code>, <code dir="auto">message</code>, <code dir="auto">origin</code>, <code dir="auto">reason</code> (the
+exception’s reason value, <code dir="auto">null</code> for a non-Stewart throwable) and <code dir="auto">at</code>. The snapshot’s
+<code dir="auto">store</code> is <code dir="auto">null</code> without <code dir="auto">persistence.url</code>, and otherwise <code dir="auto">up</code>, <code dir="auto">since</code>, <code dir="auto">last_failure</code> and <code dir="auto">last_failure_at</code>.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="boot">Boot</h2><a class="sl-anchor-link" href="#boot"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Boot”</span></a></div>
+<p><img alt="Boot" loading="lazy" decoding="async" width="977" height="1268" src="/docs-dev/_astro/06-boot.BNuKmZhl_Z27pMnb.svg"></p>
+<p>The ordering constraint worth internalising: apps are <strong>constructed</strong> on
+<code dir="auto">Bootstrap</code> but <strong>initialized</strong> only after <code dir="auto">StateSnapshot</code> has populated the
+state cache. Reading state inside <code dir="auto">initialize()</code> is normal and must work.
+<code dir="auto">RegistrySnapshot</code> comes between the two, so the registry is loaded by then too.</p>
+<p>The reader runs from before the first constructor, so a constructor may await a
+<code dir="auto">ServiceCallRequest</code> and get its answer. An app’s schedules and subscriptions
+stay dormant until that app’s own <code dir="auto">initialize()</code> returns; events matched in the
+meantime are buffered under <code dir="auto">subscription_buffer</code> and delivered in order once it
+does.</p>
+<p>The broker does not wait for <code dir="auto">WorkerReady</code>: a worker gets every state change
+from the moment it spawns, and <code dir="auto">WorkerReady</code> only cancels its ready deadline.</p>
+<p>Two <code dir="auto">amphp/parallel</code> details that bite:</p>
+<ul>
+<li>Use <code dir="auto">ProcessContextFactory</code> explicitly. <code dir="auto">DefaultContextFactory</code> silently
+substitutes threads when <code dir="auto">ext-parallel</code> is present — a different memory and
+failure model entirely.</li>
+<li>The entrypoint file must <code dir="auto">return</code> a callable taking a <code dir="auto">Channel</code>. Anything
+else fails with <em>“did not return a callable function”</em>. The Composer
+autoloader is already loaded (found by walking up), and the callable already
+runs inside a fiber, so it may await freely.</li>
+</ul>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="a-state-change">A state change</h2><a class="sl-anchor-link" href="#a-state-change"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “A state change”</span></a></div>
+<p><img alt="State event" loading="lazy" decoding="async" width="1264" height="688" src="/docs-dev/_astro/07-state-event.BpqQUg_d_Z13tIOk.svg"></p>
+<p>The broker sends every state change to every live worker, which applies it to
+its state cache and then matches it against its own subscriptions. There is no
+routing decision on the broker and no window in which a subscription exists in
+the worker but not yet in the broker.</p>
+<p>Matching is memoised per entity ID in a <code dir="auto">SelectorIndex</code>, the same one the
+broker uses for events and topics. Entity IDs are a bounded, slow-changing set,
+so fifty patterns across two thousand entities costs a few milliseconds once
+and hash lookups thereafter. Exact-ID subscriptions — the overwhelming majority
+— skip pattern matching entirely. The cache is also what makes pattern
+subscriptions pick up entities created later: an unknown ID is evaluated on
+first sight and remembered. Adding or removing a subscription clears it.</p>
+<p>A worker with no subscriber still applies every change. That is the standing
+cost of the full-state-cache decision.</p>
+<p>Each subscription has its own queue and one fiber that runs its handler, so one
+subscription handles its events one at a time while different subscriptions run
+concurrently. A handler that awaits a service call holds back only the later
+events of its own subscription.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="a-service-call">A service call</h2><a class="sl-anchor-link" href="#a-service-call"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “A service call”</span></a></div>
+<p><img alt="Service call" loading="lazy" decoding="async" width="902" height="716" src="/docs-dev/_astro/08-service-call.CQxzR7os_1AR3dv.svg"></p>
+<p>Two correlation maps, no cleverness: the worker maps <code dir="auto">correlationId → Future</code>,
+the broker maps <code dir="auto">correlationId → worker</code> and <code dir="auto">haMessageId → correlationId</code>. IDs
+are <code dir="auto">{workerId}:{n}</code>, unique across the daemon without coordination.</p>
+<p>The fiber suspension in the middle is the whole “reads like a local call”
+property.</p>
+<p>The failure mode to design against is a reply that never arrives, which leaves
+that fiber suspended for the life of the process with nothing in the logs. So
+the broker answers every request including failures, and the worker wraps every
+await in a <code dir="auto">TimeoutCancellation</code> as a backstop.</p>
+<p>Every write to Home Assistant counts against one in-flight budget, <code dir="auto">HaCallSlots</code>,
+bounded by <code dir="auto">service_calls.max_in_flight</code> and <code dir="auto">max_in_flight_per_worker</code>: service
+calls, fired events, history queries and registry edits alike. A fired event is a
+write like a service call, so it shares the budget, the per-app call counts and
+dry run; a burst of one can refuse the other. On the worker side, one
+<code dir="auto">PendingRequests</code> registry holds every correlated request.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="a-history-query">A history query</h2><a class="sl-anchor-link" href="#a-history-query"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “A history query”</span></a></div>
+<p>The same shape as a service call: one correlation ID from the same per-worker
+sequence, one reply per request, the same worker-side timeout and the same
+in-flight budget. The worker
+turns <code dir="auto">HistoryQuery::lastFor()</code> into a fixed window with its own clock before
+sending, so the broker never sees a relative time. The reply carries only the
+states; the worker already knows the entity and the window.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="app-to-app-messaging">App-to-app messaging</h2><a class="sl-anchor-link" href="#app-to-app-messaging"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “App-to-app messaging”</span></a></div>
+<p><img alt="Pub/sub" loading="lazy" decoding="async" width="1052" height="631" src="/docs-dev/_astro/09-pubsub.D-GO7V2N_1lJijA.svg"></p>
+<p>Named pub/sub, using the same selector machinery as entities — <code dir="auto">house.*</code> works.
+Unlike state changes, a topic message goes only to workers holding a matching
+subscription; there is no state cache to keep fresh.</p>
+<p>Fire-and-forget, with no reply channel. Request/response between apps was
+considered and rejected for now: it needs correlation IDs, timeouts, and a
+deadlock story for two apps that ask each other. An app needing an answer models
+it as a second topic. Adding it later is two more message types, not a redesign.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="mqtt">MQTT</h2><a class="sl-anchor-link" href="#mqtt"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “MQTT”</span></a></div>
+<p>The broker holds the only MQTT connection, as it holds the only Home Assistant
+one. <code dir="auto">stewart-php/mqtt</code> provides it behind the <code dir="auto">MqttLink</code> port; without
+<code dir="auto">mqtt.url</code> the broker uses a disabled link and workers are told
+<code dir="auto">mqtt_enabled: false</code>, so an app that asks for <code dir="auto">Mqtt</code> is not started.</p>
+<p>An app’s <code dir="auto">watchMessages('home/+/temp')</code> is a <code dir="auto">Subscribe</code> of kind <code dir="auto">mqtt</code> with an
+<code dir="auto">mqtt_filter</code> selector. The broker counts subscribers per filter and sends
+<code dir="auto">SUBSCRIBE</code> to the server only for the first and <code dir="auto">UNSUBSCRIBE</code> after the last.
+Messages from the server are matched against the same registry and sent as
+<code dir="auto">MqttMessageDelivery</code>. Payloads are bytes, so they cross the IPC wire base64
+encoded.</p>
+<p><code dir="auto">MqttPublish</code> is fire-and-forget for the app. While the server is unreachable,
+QoS 0 messages are dropped and logged; QoS 1 messages wait in a buffer of
+<code dir="auto">mqtt.outbound_buffer</code>, oldest dropped first, and are sent again after each
+reconnect until the server acknowledges them. Sessions are clean: after a
+reconnect the broker subscribes every active filter again.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="triggers">Triggers</h2><a class="sl-anchor-link" href="#triggers"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Triggers”</span></a></div>
+<p>An app’s <code dir="auto">watchTrigger()</code> is a <code dir="auto">SubscribeTrigger</code> carrying the trigger configs
+and variables. The broker keys it by a hash of the canonical JSON (map keys
+sorted, lists in order) and counts subscribers per key, as it does for MQTT
+filters: Home Assistant gets one <code dir="auto">subscribe_trigger</code> for the first subscriber and
+one <code dir="auto">unsubscribe_events</code> after the last. When it fires, the broker sends
+<code dir="auto">TriggerFired</code> to every worker holding a subscription with that key.</p>
+<p>Home Assistant’s subscription ids belong to one connection, so after every
+connect the broker subscribes each live spec again, right after
+<code dir="auto">subscribe_events</code> and before seeding states. A trigger that fired during the
+outage is not replayed, and fires that arrive while the state cache is rebuilt
+are dropped, like events. If Home Assistant refuses a spec, at first or on a
+later reconnect, every subscriber gets <code dir="auto">SubscriptionAck(false, reason)</code> and is
+removed; the connection itself carries on.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="shutdown">Shutdown</h2><a class="sl-anchor-link" href="#shutdown"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Shutdown”</span></a></div>
+<p><img alt="Shutdown" loading="lazy" decoding="async" width="822" height="710" src="/docs-dev/_astro/10-shutdown.D0MGPSUY_Z16K7iK.svg"></p>
+<p>SIGTERM or SIGINT → stop probing and restarting workers → <code dir="auto">Shutdown</code> to each worker →
+<code dir="auto">dispose()</code> → the worker <strong>returns</strong> → <code dir="auto">join()</code> with a grace period →
+<code dir="auto">close()</code> only as the force-kill, because <code dir="auto">ProcessContext::close()</code> sends a kill
+signal outright.</p>
+<p>Signal handling requires <code dir="auto">ext-pcntl</code>. Without it Revolt’s <code dir="auto">onSignal()</code> throws
+and shutdown cannot be graceful at all, which is why <code dir="auto">make doctor</code> checks for
+it.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="backpressure">Backpressure</h2><a class="sl-anchor-link" href="#backpressure"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Backpressure”</span></a></div>
+<p>Each <code dir="auto">WorkerHandle</code> holds a bounded outbound buffer (1000 by default,
+<code dir="auto">worker_event_buffer</code> in <code dir="auto">stewart.yaml</code>). Topic messages and Home Assistant
+events share it; when it fills, the <strong>oldest</strong> of them is dropped, a warning
+names the worker and the drop count, and the count travels in the worker’s
+outbox status. Every other message is kept, except that an unanswered probe is
+replaced by the next one rather than queued behind it. State changes are not counted against the
+buffer: they coalesce per entity instead, so a slow worker sees fewer of them
+but never loses the latest.</p>
+<p>A queued <code dir="auto">RegistrySnapshot</code> is replaced by a newer one, like an unanswered
+probe, so a slow worker gets only the latest registry.</p>
+<p>Coalescing keeps the first queued change of an entity where it is and merges
+every later one into a single change at the tail, from the state the first one
+reached to the latest. on → off → on therefore still arrives as two edges, and
+the merged change never overtakes an event queued before it. Consecutive queued
+state changes leave as one <code dir="auto">StateChangeBatch</code> of at most <code dir="auto">worker_state_batch</code>
+(256 by default).</p>
+<p>Inside the worker, each subscription queues up to <code dir="auto">subscription_buffer</code> events
+(100 by default) while its handler is busy. When a state-change queue is full, it
+first drops the oldest change that a newer change of the same entity supersedes,
+and the newer one starts from the dropped one’s state. A quiet entity’s only
+change therefore survives a chatty neighbour. If no entity has two queued
+changes, and for every other kind of event, the oldest is dropped. A burst of
+state changes, one <code dir="auto">StateChangeBatch</code> or a resync, is queued whole: older queued
+events make room for it. Drops are counted per app and logged as a sampled
+warning.</p>
+<p>Dropping oldest rather than newest is the right way round for automations: a
+stale state change is the least valuable thing in the queue. Blocking instead
+would let one slow app halt every other automation in the house, which defeats
+the point of the isolation. Unbounded buffering is an OOM waiting for a slow
+app.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="reconnect">Reconnect</h2><a class="sl-anchor-link" href="#reconnect"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Reconnect”</span></a></div>
+<p>The connection drops, <code dir="auto">HaConnection</code> fires its disconnect hook, and the broker
+retries forever with capped backoff. A worker that dies meanwhile is restarted
+on its usual backoff. It is bootstrapped with the last snapshot, told
+<code dir="auto">HaConnectionLost</code> straight after, and resynced with everyone else.</p>
+<p>Each attempt closes any half-open socket, connects, <strong>subscribes first</strong>, then
+calls <code dir="auto">get_states</code>. Changes arriving between the two are buffered by entity id
+and drained onto the cache straight after the seed. Seeding before subscribing
+would lose every change in that window permanently.</p>
+<p>Every live worker hears <code dir="auto">HaConnectionLost</code> when the connection drops. From
+then on <code dir="auto">isConnected()</code> is false and <code dir="auto">callService()</code> fails at once as
+<code dir="auto">Unreachable</code>. Schedules keep running.</p>
+<p>Each attempt also reads the five registries after <code dir="auto">get_states</code>. The seed, the
+re-encode and the broadcast contain no suspension point, so no worker can see a
+half-rebuilt cache. Every live worker then gets one <code dir="auto">RegistrySnapshot</code> and one
+<code dir="auto">StateResynced</code>, in that order, so reconstructed changes match entity filters
+against the current registry. Each one compares the new snapshot with its state cache, swaps it
+in, and queues one reconstructed <code dir="auto">StateChange</code> (<code dir="auto">origin: Resync</code>) per entity
+that differs, including entities that appeared or disappeared. Then it
+dispatches <code dir="auto">ConnectionRestored</code> to the apps that listen. A flap during the
+outage shows as one edge, because only the two ends are known.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="failure-modes">Failure modes</h2><a class="sl-anchor-link" href="#failure-modes"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Failure modes”</span></a></div>
+<table>
+<thead>
+<tr>
+<th>What happens</th>
+<th>How it surfaces</th>
+<th>What the broker does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Worker segfaults or is <code dir="auto">kill -9</code>’d</td>
+<td><code dir="auto">receive()</code> throws <code dir="auto">ContextException</code></td>
+<td>Drops its subscriptions, then respawns it after a backoff</td>
+</tr>
+<tr>
+<td>A worker keeps dying</td>
+<td><code dir="auto">restart_attempts</code> spent inside <code dir="auto">restart_window</code></td>
+<td>Quarantines it and logs at <code dir="auto">error</code>, naming the automations now down</td>
+</tr>
+<tr>
+<td>Worker stops responding</td>
+<td><code dir="auto">Pong</code> lag climbs, or nonces go unanswered</td>
+<td>Warns, naming the worker and its apps — usually blocking code</td>
+</tr>
+<tr>
+<td>App throws in <code dir="auto">initialize()</code></td>
+<td><code dir="auto">AppFailed</code> with phase <code dir="auto">Initialize</code></td>
+<td>App is dropped and its subscriptions cancelled</td>
+</tr>
+<tr>
+<td>App throws in a handler</td>
+<td><code dir="auto">AppFailed</code> with phase <code dir="auto">Handler</code></td>
+<td>Logged; the app keeps running</td>
+</tr>
+<tr>
+<td>An event or topic subscription the broker cannot route</td>
+<td><code dir="auto">SubscriptionAck { accepted: false }</code></td>
+<td>Worker logs an error rather than receiving nothing forever</td>
+</tr>
+<tr>
+<td>Home Assistant restarts</td>
+<td><code dir="auto">HaClientError::ConnectionDropped</code></td>
+<td>Sends <code dir="auto">HaConnectionLost</code>, reconnects with capped backoff, rebuilds state, sends <code dir="auto">StateResynced</code></td>
+</tr>
+<tr>
+<td>The store stops answering</td>
+<td>A worker’s call times out or finds it unreachable</td>
+<td>Nothing: that worker fails store calls at once for <code dir="auto">persistence.recovery_interval</code>, then tries again; its next <code dir="auto">Pong</code> reports the store down</td>
+</tr>
+<tr>
+<td>A frame cannot be decoded</td>
+<td><code dir="auto">TransportError::UndecodableFrame</code></td>
+<td>The reader logs the tag and drops the frame; an undecodable <code dir="auto">Bootstrap</code> stops the worker</td>
+</tr>
+<tr>
+<td>Broker and worker disagree on the protocol</td>
+<td><code dir="auto">TransportError::ProtocolMismatch</code> on <code dir="auto">Bootstrap</code></td>
+<td>The worker stops; the restart budget quarantines it if it keeps happening</td>
+</tr>
+<tr>
+<td>Home Assistant rejects the token</td>
+<td><code dir="auto">HaClientError::TokenRejected</code></td>
+<td>Fatal: stops every worker cleanly and exits non-zero</td>
+</tr>
+<tr>
+<td>The token’s user is not an administrator</td>
+<td><code dir="auto">HaClientError::AdministratorRequired</code> on <code dir="auto">subscribe_events</code></td>
+<td>Fatal the same way; retrying cannot grant the privilege</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="testing-it">Testing it</h2><a class="sl-anchor-link" href="#testing-it"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Testing it”</span></a></div>
+<p><code dir="auto">packages/runtime/tests/Integration/Protocol/WorkerProtocolTest.php</code> boots a
+worker in-process over an in-memory transport pair and drives the whole protocol
+from the test, standing in for the broker. Frames still go through the codecs. It
+runs with <code dir="auto">make test-integration</code> and needs neither Home Assistant nor Valkey.</p>
+<p>This is the test that earns its keep: the entrypoint contract, the
+initialize-after-snapshot ordering, selector serialization, service-call
+correlation and clean shutdown are all invisible to testing a single class.</p>
+<p><code dir="auto">make test-process</code> runs <code dir="auto">packages/runtime/tests/Process/WorkerProcessSmokeTest.php</code>: a real
+worker process over a real pipe, and a store in Valkey that outlives it.</p>
+</div><footer class="sl-flex astro-ddtxxk7k"><div class="meta sl-flex astro-ddtxxk7k"><a href="https://github.com/stewart-php/stewart/edit/main/docs/dev/protocol.md" class="sl-flex print:hidden astro-qlekgd3o"><svg aria-hidden="true" class="astro-qlekgd3o astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.2em;"><path d="M22 7.24a1 1 0 0 0-.29-.71l-4.24-4.24a1 1 0 0 0-1.1-.22 1 1 0 0 0-.32.22l-2.83 2.83L2.29 16.05a1 1 0 0 0-.29.71V21a1 1 0 0 0 1 1h4.24a1 1 0 0 0 .76-.29l10.87-10.93L21.71 8c.1-.1.17-.2.22-.33a1 1 0 0 0 0-.24v-.14l.07-.05ZM6.83 20H4v-2.83l9.93-9.93 2.83 2.83L6.83 20ZM18.17 8.66l-2.83-2.83 1.42-1.41 2.82 2.82-1.41 1.42Z"/></svg>Edit page</a></div><div class="pagination-links print:hidden astro-g3wxxdym" dir="ltr"><a href="/docs-dev/architecture/" rel="prev" class="astro-g3wxxdym"><span class="link-label sl-flex astro-g3wxxdym"><svg aria-hidden="true" class="astro-g3wxxdym astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg>Previous</span><span class="link-title astro-g3wxxdym">Architecture</span></a><a href="/docs-dev/control-protocol/" rel="next" class="astro-g3wxxdym"><span class="link-label sl-flex astro-g3wxxdym">Next<svg aria-hidden="true" class="astro-g3wxxdym astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg></span><span class="link-title astro-g3wxxdym">Control protocol</span></a></div></footer></div></div></main></div></div></div></div></body></html>
