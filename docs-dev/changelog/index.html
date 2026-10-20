@@ -1,0 +1,778 @@
+<!DOCTYPE html><html lang="en" dir="ltr" data-theme="dark" data-has-toc data-has-sidebar class="astro-g5ptsecz"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Changelog | Stewart — Developers</title><link rel="canonical" href="https://stewart-php.github.io/docs-dev/changelog/"/><link rel="sitemap" href="/docs-dev/sitemap-index.xml"/><link rel="shortcut icon" href="/docs-dev/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v7.3.2"/><meta name="generator" content="Starlight v0.42.6"/><meta property="og:title" content="Changelog"/><meta property="og:type" content="article"/><meta property="og:url" content="https://stewart-php.github.io/docs-dev/changelog/"/><meta property="og:locale" content="en"/><meta property="og:description" content="Every change of every Stewart release."/><meta property="og:site_name" content="Stewart — Developers"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="Every change of every Stewart release."/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg><svg aria-hidden="true" class="dark astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg><svg aria-hidden="true" class="auto astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg></template><link rel="stylesheet" href="/docs-dev/_astro/print.ehPL0gv-.css" media="print"><link rel="stylesheet" href="/docs-dev/_astro/common.BhE-JJsQ.css"><script type="module" src="/docs-dev/_astro/page.Dwipeu-R.js"></script></head><body class="astro-g5ptsecz"><a class="sl-skip-link astro-qb7clj6f" href="#_top">Skip to content</a><div class="page sl-flex astro-yntsjkba"><header class="header astro-yntsjkba"><div class="header astro-by6fddyj"><div class="title-wrapper sl-flex astro-by6fddyj"><a href="/docs-dev/" class="site-title sl-flex astro-6rvad3va"><span class="astro-6rvad3va" translate="no">Stewart — Developers</span></a></div><div class="sl-flex print:hidden astro-by6fddyj"><site-search class="astro-by6fddyj astro-b5kgnn7o" data-translations="{&quot;placeholder&quot;:&quot;Search&quot;}"><button data-open-modal disabled aria-label="Search" aria-keyshortcuts="Control+K" class="astro-b5kgnn7o"><svg aria-hidden="true" class="astro-b5kgnn7o astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg><span class="sl-hidden md:sl-block astro-b5kgnn7o" aria-hidden="true">Search</span><kbd class="sl-hidden md:sl-flex astro-b5kgnn7o" style="display: none;"><kbd class="astro-b5kgnn7o">Ctrl</kbd><kbd class="astro-b5kgnn7o">K</kbd></kbd></button><dialog style="padding:0" aria-label="Search" class="astro-b5kgnn7o"><div class="dialog-frame sl-flex astro-b5kgnn7o"><button data-close-modal class="sl-flex md:sl-hidden astro-b5kgnn7o">Cancel</button><div class="search-container astro-b5kgnn7o"><div id="starlight__search" class="astro-b5kgnn7o"></div></div></div></dialog></site-search><script>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script><script type="module" src="/docs-dev/_astro/Search.astro_astro_type_script_index_0_lang.HijIgePq.js"></script></div><div class="sl-hidden md:sl-flex print:hidden right-group astro-by6fddyj"><div class="sl-flex social-icons astro-by6fddyj"><a href="https://github.com/stewart-php" rel="me" class="sl-flex astro-n2mnl6yq"><span class="sr-only astro-n2mnl6yq">GitHub</span><svg aria-hidden="true" class="astro-n2mnl6yq astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-rapide-theme-select class="astro-xgdtbcdp"><button aria-label="Select theme" aria-live="polite" class="sl-flex astro-xgdtbcdp" title="Select theme"><svg aria-hidden="true" height="16" viewBox="0 0 24 24" width="16" class="astro-xgdtbcdp"><mask class="moon astro-xgdtbcdp" id="moon-mask-4e32920f"><rect x="0" y="0" width="100%" height="100%" fill="white" class="astro-xgdtbcdp"></rect><circle cx="24" cy="10" r="6" fill="black" class="astro-xgdtbcdp"></circle></mask><circle class="sun astro-xgdtbcdp" cx="12" cy="12" r="6" mask="url(#moon-mask-4e32920f)"></circle><g class="sun-beams astro-xgdtbcdp" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="3" class="astro-xgdtbcdp"></line><line x1="12" y1="21" x2="12" y2="23" class="astro-xgdtbcdp"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" class="astro-xgdtbcdp"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" class="astro-xgdtbcdp"></line><line x1="1" y1="12" x2="3" y2="12" class="astro-xgdtbcdp"></line><line x1="21" y1="12" x2="23" y2="12" class="astro-xgdtbcdp"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" class="astro-xgdtbcdp"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" class="astro-xgdtbcdp"></line></g></svg></button></starlight-rapide-theme-select><script>
+  StarlightThemeProvider.updatePickers()
+</script><script type="module">var e=`starlight-theme`;function t(e){return e===`auto`||e===`dark`||e===`light`?e:`auto`}function n(){return t(typeof localStorage<`u`&&localStorage.getItem(e))}function r(t){typeof localStorage<`u`&&localStorage.setItem(e,t===`light`||t===`dark`?t:``)}function i(){return matchMedia(`(prefers-color-scheme: light)`).matches?`light`:`dark`}function a(e){StarlightThemeProvider.updatePickers(e),document.documentElement.dataset.theme=e===`auto`?i():e,r(e)}matchMedia(`(prefers-color-scheme: light)`).addEventListener(`change`,()=>{n()===`auto`&&a(`auto`)}),customElements.define(`starlight-rapide-theme-select`,class extends HTMLElement{constructor(){super(),a(n());let e=this.querySelector(`button`);e?.addEventListener(`click`,()=>{let n=t(document.documentElement.dataset.theme),r=n===`dark`?`light`:n===`light`?`dark`:`auto`;a(r),e?.setAttribute(`aria-label`,`${r} theme`)})}});</script></div></div></header><nav class="sidebar print:hidden astro-yntsjkba" aria-label="Main"><button popovertarget="starlight__sidebar" class="sl-menu-button sl-flex md:sl-hidden print:hidden astro-r2osgdlg"><svg aria-hidden="true" class="open-menu astro-r2osgdlg astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg><svg aria-hidden="true" class="close-menu astro-r2osgdlg astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg><span class="sr-only astro-r2osgdlg">Menu</span></button><script type="module">var e=class extends HTMLElement{constructor(){super();let e=matchMedia(`(min-width: 50em)`),t=()=>{this.popover=e.matches?null:`auto`};t(),e.addEventListener(`change`,()=>t()),this.addEventListener(`toggle`,({newState:e})=>this.trapFocus(e===`open`))}trapFocus(e){document.querySelectorAll(`.main-frame, .sl-skip-link`).forEach(t=>{t.toggleAttribute(`inert`,e)})}};customElements.define(`sl-sidebar-pane`,e);</script><sl-sidebar-pane popover id="starlight__sidebar" class="sidebar-pane astro-yntsjkba"><div class="sidebar-content sl-flex astro-yntsjkba"><sl-sidebar-state-persist data-hash="0xdacm5" class="astro-ipdry5cl"><script aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script><ul class="top-level astro-rmhv4bp6"><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Contributing</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="0"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/docs-dev/contributing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Contributing</span></a></li><li class="astro-rmhv4bp6"><a href="/docs-dev/conventions/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Conventions</span></a></li><li class="astro-rmhv4bp6"><a href="/docs-dev/testing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Testing</span></a></li><li class="astro-rmhv4bp6"><a href="/docs-dev/releasing/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Releasing</span></a></li><li class="astro-rmhv4bp6"><a href="/docs-dev/changelog/" aria-current="page" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Changelog</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Internals</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="1"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/docs-dev/architecture/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Architecture</span></a></li><li class="astro-rmhv4bp6"><a href="/docs-dev/protocol/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Channel protocol</span></a></li><li class="astro-rmhv4bp6"><a href="/docs-dev/control-protocol/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Control protocol</span></a></li><li class="astro-rmhv4bp6"><a href="/docs-dev/component-protocol/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Component protocol</span></a></li></ul></details></li><li class="astro-rmhv4bp6"><details open class="astro-rmhv4bp6"><summary class="astro-rmhv4bp6"><span class="group-label astro-rmhv4bp6"><span class="large astro-rmhv4bp6">Code walkthrough</span></span><svg aria-hidden="true" class="caret astro-rmhv4bp6 astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></summary><sl-sidebar-restore data-index="2"></sl-sidebar-restore><ul class="astro-rmhv4bp6"><li class="astro-rmhv4bp6"><a href="/docs-dev/walkthrough/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Code walkthrough</span></a></li><li class="astro-rmhv4bp6"><a href="/docs-dev/walkthrough/console/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Console and configuration</span></a></li><li class="astro-rmhv4bp6"><a href="/docs-dev/walkthrough/broker/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">The broker</span></a></li><li class="astro-rmhv4bp6"><a href="/docs-dev/walkthrough/worker/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">The worker</span></a></li><li class="astro-rmhv4bp6"><a href="/docs-dev/walkthrough/client/" class="astro-rmhv4bp6"><span class="astro-rmhv4bp6">Client and testing</span></a></li></ul></details></li></ul><script aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script></sl-sidebar-state-persist><div class="md:sl-hidden"><div class="mobile-preferences sl-flex astro-p4azlveh"><div class="social-icons astro-p4azlveh"><a href="https://github.com/stewart-php" rel="me" class="sl-flex astro-n2mnl6yq"><span class="sr-only astro-n2mnl6yq">GitHub</span><svg aria-hidden="true" class="astro-n2mnl6yq astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a></div><starlight-rapide-theme-select class="astro-xgdtbcdp"><button aria-label="Select theme" aria-live="polite" class="sl-flex astro-xgdtbcdp" title="Select theme"><svg aria-hidden="true" height="16" viewBox="0 0 24 24" width="16" class="astro-xgdtbcdp"><mask class="moon astro-xgdtbcdp" id="moon-mask-befe0d1b"><rect x="0" y="0" width="100%" height="100%" fill="white" class="astro-xgdtbcdp"></rect><circle cx="24" cy="10" r="6" fill="black" class="astro-xgdtbcdp"></circle></mask><circle class="sun astro-xgdtbcdp" cx="12" cy="12" r="6" mask="url(#moon-mask-befe0d1b)"></circle><g class="sun-beams astro-xgdtbcdp" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="3" class="astro-xgdtbcdp"></line><line x1="12" y1="21" x2="12" y2="23" class="astro-xgdtbcdp"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" class="astro-xgdtbcdp"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" class="astro-xgdtbcdp"></line><line x1="1" y1="12" x2="3" y2="12" class="astro-xgdtbcdp"></line><line x1="21" y1="12" x2="23" y2="12" class="astro-xgdtbcdp"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" class="astro-xgdtbcdp"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" class="astro-xgdtbcdp"></line></g></svg></button></starlight-rapide-theme-select><script>
+  StarlightThemeProvider.updatePickers()
+</script></div></div></div></sl-sidebar-pane></nav><div class="main-frame astro-yntsjkba"><script type="module">var e=document.getElementById(`starlight__sidebar`),t=e?.querySelector(`sl-sidebar-state-persist`),n=`sl-sidebar-state`,r=()=>{let r=[],i=t?.dataset.hash||``;try{let e=sessionStorage.getItem(n),t=JSON.parse(e||`{}`);Array.isArray(t.open)&&t.hash===i&&(r=t.open)}catch{}return{hash:i,open:r,scroll:e?.scrollTop||0}},i=e=>{try{sessionStorage.setItem(n,JSON.stringify(e))}catch{}},a=()=>i(r()),o=(e,t)=>{let n=r();n.open[t]=e,i(n)};t?.addEventListener(`click`,e=>{if(!(e.target instanceof Element))return;let t=e.target.closest(`summary`)?.closest(`details`);if(!t)return;let n=t.querySelector(`sl-sidebar-restore`),r=parseInt(n?.dataset.index||``);isNaN(r)||o(!t.open,r)}),addEventListener(`visibilitychange`,()=>{document.visibilityState===`hidden`&&a()});</script><div class="lg:sl-flex astro-lrzkfocr"><aside class="right-sidebar-container print:hidden astro-lrzkfocr"><div class="right-sidebar astro-lrzkfocr"><div class="lg:sl-hidden astro-qok35upx"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-66cqc7ze"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-66cqc7ze"><details id="starlight__mobile-toc" class="astro-66cqc7ze"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-66cqc7ze"><span class="toggle sl-flex astro-66cqc7ze">On this page<svg aria-hidden="true" class="caret astro-66cqc7ze astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></span><span class="display-current astro-66cqc7ze"></span></summary><div class="dropdown astro-66cqc7ze"><ul class="isMobile astro-jugkfwgx" style="--depth: 0;"><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#_top" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Overview</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#140---2026-10-20" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[1.4.0] - 2026-10-20</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#130---2026-10-20" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[1.3.0] - 2026-10-20</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-1" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#fixed" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Fixed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-1" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#121---2026-10-19" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[1.2.1] - 2026-10-19</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#fixed-1" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Fixed</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#120---2026-10-19" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[1.2.0] - 2026-10-19</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-1" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#fixed-2" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Fixed</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#110---2026-10-15" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[1.1.0] - 2026-10-15</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-2" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-2" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#100---2026-10-13" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[1.0.0] - 2026-10-13</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-3" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-3" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-2" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#0111---2026-10-13" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.11.1] - 2026-10-13</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#fixed-3" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Fixed</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#0110---2026-10-13" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.11.0] - 2026-10-13</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-4" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-4" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#fixed-4" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Fixed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#removed" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Removed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-3" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#0100---2026-10-12" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.10.0] - 2026-10-12</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#fixed-5" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Fixed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-5" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-4" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#090---2026-10-09" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.9.0] - 2026-10-09</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#highlights" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Highlights</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-5" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-6" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-5" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#080---2026-10-08" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.8.0] - 2026-10-08</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#highlights-1" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Highlights</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-6" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-7" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-6" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#070---2026-10-07" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.7.0] - 2026-10-07</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#highlights-2" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Highlights</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-7" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-8" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-7" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#060---2026-10-06" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.6.0] - 2026-10-06</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#highlights-3" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Highlights</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-8" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-9" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-8" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#050---2026-10-06" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.5.0] - 2026-10-06</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#highlights-4" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Highlights</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-9" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-10" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-9" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#040---2026-10-04" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.4.0] - 2026-10-04</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-10" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-11" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-10" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#030---2026-10-03" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.3.0] - 2026-10-03</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-11" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-12" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#removed-1" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Removed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-11" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#021---2026-10-03" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.2.1] - 2026-10-03</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#fixed-6" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Fixed</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#020---2026-10-03" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.2.0] - 2026-10-03</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-12" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-12" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#010---2026-10-03" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.1.0] - 2026-10-03</span></a><ul class="isMobile astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-13" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li></ul></li></ul></div></details></nav></mobile-starlight-toc><script type="module" src="/docs-dev/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.C3fM4Kra.js"></script></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-qok35upx"><div class="sl-container astro-qok35upx"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">On this page</h2><ul class="astro-jugkfwgx" style="--depth: 0;"><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#_top" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">Overview</span></a></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#140---2026-10-20" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[1.4.0] - 2026-10-20</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#130---2026-10-20" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[1.3.0] - 2026-10-20</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-1" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#fixed" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Fixed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-1" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#121---2026-10-19" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[1.2.1] - 2026-10-19</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#fixed-1" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Fixed</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#120---2026-10-19" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[1.2.0] - 2026-10-19</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-1" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#fixed-2" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Fixed</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#110---2026-10-15" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[1.1.0] - 2026-10-15</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-2" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-2" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#100---2026-10-13" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[1.0.0] - 2026-10-13</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-3" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-3" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-2" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#0111---2026-10-13" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.11.1] - 2026-10-13</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#fixed-3" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Fixed</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#0110---2026-10-13" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.11.0] - 2026-10-13</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-4" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-4" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#fixed-4" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Fixed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#removed" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Removed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-3" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#0100---2026-10-12" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.10.0] - 2026-10-12</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#fixed-5" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Fixed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-5" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-4" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#090---2026-10-09" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.9.0] - 2026-10-09</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#highlights" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Highlights</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-5" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-6" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-5" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#080---2026-10-08" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.8.0] - 2026-10-08</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#highlights-1" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Highlights</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-6" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-7" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-6" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#070---2026-10-07" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.7.0] - 2026-10-07</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#highlights-2" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Highlights</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-7" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-8" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-7" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#060---2026-10-06" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.6.0] - 2026-10-06</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#highlights-3" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Highlights</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-8" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-9" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-8" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#050---2026-10-06" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.5.0] - 2026-10-06</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#highlights-4" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Highlights</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-9" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-10" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-9" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#040---2026-10-04" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.4.0] - 2026-10-04</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-10" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-11" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-10" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#030---2026-10-03" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.3.0] - 2026-10-03</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-11" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#changed-12" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Changed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#removed-1" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Removed</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-11" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#021---2026-10-03" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.2.1] - 2026-10-03</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#fixed-6" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Fixed</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#020---2026-10-03" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.2.0] - 2026-10-03</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-12" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#upgrading-12" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Upgrading</span></a></li></ul></li><li style="--depth: 0;" class="astro-jugkfwgx"><a href="#010---2026-10-03" style="--depth: 0;" class="astro-jugkfwgx"><span style="--depth: 0;" class="astro-jugkfwgx">[0.1.0] - 2026-10-03</span></a><ul class="astro-jugkfwgx" style="--depth: 1;"><li style="--depth: 1;" class="astro-jugkfwgx"><a href="#added-13" style="--depth: 1;" class="astro-jugkfwgx"><span style="--depth: 1;" class="astro-jugkfwgx">Added</span></a></li></ul></li></ul></nav></starlight-toc><script type="module" src="/docs-dev/_astro/TableOfContents.astro_astro_type_script_index_0_lang.BpJaGz7G.js"></script></div></div></div></aside><div class="main-pane astro-lrzkfocr"><main data-pagefind-body class="astro-g5ptsecz" lang="en" dir="ltr"><div class="content-panel astro-a7po4psb"><div class="sl-container astro-a7po4psb"><h1 id="_top" class="astro-bebwqqxs">Changelog</h1></div></div><div class="content-panel astro-a7po4psb"><div class="sl-container astro-a7po4psb"><div class="sl-markdown-content"><p>Every package, the <code>ghcr.io/stewart-php/runtime</code> image, the Helm chart, the skeleton and the Home Assistant
+integration share one version. The format follows <a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a>, and from
+1.0 Stewart follows <a href="https://semver.org/">semantic versioning</a>: only a major release breaks. Before 1.0, a minor
+release could break; a release’s “Upgrading” section says what to change.</p>
+<h2 id="140---2026-10-20">[1.4.0] - 2026-10-20</h2>
+<p>A new project reaches its first automation in fewer steps, and <code>stewart doctor</code> names what is missing.</p>
+<h3 id="added">Added</h3>
+<ul>
+<li>The Helm chart creates a Service for the admin API once <code>adminApi.host</code> is reachable from other pods, so other
+workloads reach it at <code>http://&lt;release&gt;-stewart.&lt;namespace&gt;.svc:8081</code>
+(<a href="https://github.com/stewart-php/stewart/pull/88">#88</a>)</li>
+<li><code>stewart check</code> lists every app with its class, the worker it runs on and whether it is enabled, paused or
+disabled (<a href="https://github.com/stewart-php/stewart/pull/91">#91</a>)</li>
+<li>New projects get <code>make check</code>, <code>make app-pause APP=…</code>, <code>make app-resume APP=…</code>, <code>make app-reset APP=…</code> and
+<code>make worker-restart WORKER=…</code> (<a href="https://github.com/stewart-php/stewart/pull/92">#92</a>)</li>
+<li><code>stewart make:app PorchLight</code> (<code>make app NAME=PorchLight</code> in a project) creates an app in <code>apps/</code> and its test in
+<code>tests/</code>, deriving the ID <code>porch-light</code> unless <code>--id</code> sets one
+(<a href="https://github.com/stewart-php/stewart/pull/93">#93</a>)</li>
+<li><code>stewart doctor</code> (<code>make doctor</code>) also checks <code>.env</code>, the configuration, the Home Assistant connection, whether the
+token belongs to an administrator, the Home Assistant location, the Stewart integration and the store; settings
+that are not there are skipped, and <code>--offline</code> keeps only the container checks, as <code>make setup</code> does
+(<a href="https://github.com/stewart-php/stewart/pull/94">#94</a>)</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>New projects start with a short <code>HelloApp</code> that greets in the log and with a Home Assistant notification; the
+exposure demo moved to <code>ChangeCounter</code>, which stays off until the Stewart integration is installed
+(<a href="https://github.com/stewart-php/stewart/pull/89">#89</a>)</li>
+<li>Valkey starts only while <code>.env</code> sets <code>COMPOSE_PROFILES=store</code>; new projects have that line next to
+<code>STEWART_PERSISTENCE__URL</code>, so removing both leaves Valkey off when no app takes a <code>Store</code>
+(<a href="https://github.com/stewart-php/stewart/pull/90">#90</a>)</li>
+<li>The skeleton README starts with the Docker-only <code>composer create-project</code> command, and the install guide covers
+Windows through WSL2 (<a href="https://github.com/stewart-php/stewart/pull/90">#90</a>)</li>
+</ul>
+<h3 id="upgrading">Upgrading</h3>
+<ol>
+<li>Run <code>make upgrade VERSION=1.4</code>. Protocols are unchanged, so a 1.3 daemon, <code>stewart</code> CLI and Home Assistant
+integration work with 1.4.</li>
+<li>The new Makefile targets reach only new projects. To use them, copy <code>check</code>, <code>app</code>, <code>app-pause</code>, <code>app-resume</code>,
+<code>app-reset</code>, <code>worker-restart</code> and the <code>required</code> line from the
+<a href="https://github.com/stewart-php/skeleton/blob/main/Makefile">skeleton’s Makefile</a>; there, <code>doctor</code> runs with
+<code>$(RUN_APP)</code> and <code>setup</code> runs <code>stewart doctor --offline</code>.</li>
+<li>To make Valkey optional, first add <code>COMPOSE_PROFILES=store</code> to <code>.env</code> next to <code>STEWART_PERSISTENCE__URL</code>. Then add
+<code>profiles: [store]</code> to the <code>valkey</code> service and <code>required: false</code> under <code>depends_on: valkey:</code> in <code>compose.yaml</code> and
+in any deploy compose file you copied. With the profile but without the <code>.env</code> line, Valkey no longer starts.</li>
+<li>An existing <code>HelloApp</code> keeps working; nothing changes for it.</li>
+</ol>
+<h2 id="130---2026-10-20">[1.3.0] - 2026-10-20</h2>
+<p>Home Assistant can delete the devices of a daemon that is gone, an unknown app ID in the configuration warns
+instead of stopping Stewart, and status reports the memory each process really uses.</p>
+<h3 id="added-1">Added</h3>
+<ul>
+<li>Home Assistant can delete the devices of a Stewart daemon that is not connected; deleting its hub removes its
+devices and entities, so a test <code>expose.instance</code> no longer lingers</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>The Helm chart rolls the pod when <code>homeAssistant.token</code> or <code>persistence.url</code> changes, instead of keeping the
+old value until the next restart</li>
+<li><code>host.docker.internal</code> reaches the host with <code>make up</code> and the deploy compose files too, not only with <code>make run</code></li>
+<li><code>stewart status</code> and the <code>stewart_broker_memory_bytes</code> and <code>stewart_worker_memory_bytes</code> metrics report each
+process’s resident memory, instead of the PHP heap, which left out opcache and extensions; expect higher values</li>
+<li>An app ID in <code>stewart.yaml</code> or a <code>STEWART_APPS__*</code> variable that names no automation logs a warning and is ignored,
+as documented, instead of stopping the daemon; <code>stewart check</code> prints the warning and passes</li>
+<li><code>stewart --help</code> lists the commands, instead of showing the help of <code>run</code>; <code>stewart run --help</code> still shows it</li>
+<li>The CLI reference lists only each command’s own arguments and options, instead of the console’s global options
+under <code>config:reference</code></li>
+<li>The metrics reference lists the labels of <code>stewart_app_exposed_commands_total</code> and
+<code>stewart_worker_restart_due_timestamp_seconds</code>, instead of none</li>
+<li>The error reference says what to do for the errors a first run or an upgrade hits: Home Assistant connection and
+token, configuration files and tokens, control and worker protocol versions, and the store</li>
+</ul>
+<h3 id="upgrading-1">Upgrading</h3>
+<ol>
+<li>Run <code>make upgrade VERSION=1.3</code>. Protocols are unchanged, so a 1.2 daemon, <code>stewart</code> CLI and Home Assistant
+integration work with 1.3.</li>
+<li>For <code>host.docker.internal</code> with <code>make up</code>, add <code>extra_hosts: ["host.docker.internal:host-gateway"]</code> to the
+<code>stewart</code> service in <code>compose.yaml</code>, and in any deploy compose file you copied.</li>
+<li>Memory now reads higher, since it counts the whole process; raise alerts on <code>stewart_broker_memory_bytes</code> and
+<code>stewart_worker_memory_bytes</code> to match.</li>
+</ol>
+<h2 id="121---2026-10-19">[1.2.1] - 2026-10-19</h2>
+<p>A burst of state changes from Home Assistant reaches workers whole again.</p>
+<h3 id="fixed-1">Fixed</h3>
+<ul>
+<li>State changes of an entity merge only once a full <code>worker_state_batch</code> is queued for a worker, so a burst from one
+Home Assistant frame reaches handlers step by step instead of losing the changes between its first and its latest</li>
+</ul>
+<h2 id="120---2026-10-19">[1.2.0] - 2026-10-19</h2>
+<p>State changes cost less CPU on the broker and on workers, and Home Assistant traffic arrives in fewer, cheaper frames.</p>
+<h3 id="changed-1">Changed</h3>
+<ul>
+<li>MQTT and Valkey connections turn on <code>TCP_NODELAY</code>, so a burst of small packets no longer waits on delayed ACKs</li>
+<li>The Home Assistant client asks for <code>coalesce_messages</code>, so a burst of events arrives in fewer WebSocket frames</li>
+<li>The runtime image keeps compiled PHP in <code>/tmp</code> (<code>opcache.file_cache</code>), so workers and console commands after the
+first start without compiling the framework again; code is still revalidated when files change</li>
+<li>A state change’s <code>from</code> comes from the worker’s state cache, so it is always what <code>getState()</code> returned just before
+the change</li>
+<li>Workers receive only the new state of each change, and the broker no longer decodes Home Assistant’s <code>old_state</code>,
+so each state change costs less CPU on the broker and on every worker</li>
+<li>The broker encodes state changes, snapshots and history for workers with hand-written converters instead of
+reflection, and waiting on one entity no longer clears every other entity’s cached routing match</li>
+</ul>
+<h3 id="fixed-2">Fixed</h3>
+<ul>
+<li><code>stewart status</code>, <code>app:pause</code>, <code>app:resume</code>, <code>app:reset</code> and <code>worker:restart</code> fail at once when no daemon
+listens, instead of retrying the control socket for six seconds whatever <code>--timeout</code> says</li>
+<li>A Home Assistant frame with invalid UTF-8 is logged and dropped, instead of closing the connection and forcing a
+resync</li>
+</ul>
+<h2 id="110---2026-10-15">[1.1.0] - 2026-10-15</h2>
+<p>The runtime image runs the event loop on <code>ext-ev</code>, and the Helm chart keeps fewer old ReplicaSets.</p>
+<h3 id="added-2">Added</h3>
+<ul>
+<li>The Helm chart’s <code>revisionHistoryLimit</code> sets how many old ReplicaSets the Deployment keeps; 3 by default, down
+from Kubernetes’ 10</li>
+</ul>
+<h3 id="changed-2">Changed</h3>
+<ul>
+<li>The runtime image includes <code>ext-ev</code>, so the event loop runs on Revolt’s <code>EvDriver</code> instead of <code>stream_select()</code>;
+<code>stewart-php/runtime</code> suggests it for installs outside the image. Projects on <code>runtime:1</code> get it with their next
+image pull, without a Composer update. Set <code>REVOLT_DRIVER='Revolt\EventLoop\Driver\StreamSelectDriver'</code> to keep
+<code>stream_select()</code></li>
+</ul>
+<h2 id="100---2026-10-13">[1.0.0] - 2026-10-13</h2>
+<p>The first stable release. From here on, <code>stewart-php/contracts</code>, the generated classes, configuration keys,
+environment variables, console commands and the image entrypoint settings change only in a major release. The code is
+the same as 0.11.1.</p>
+<h3 id="added-3">Added</h3>
+<ul>
+<li>Documentation at <a href="https://stewart-php.github.io/docs/">stewart-php.github.io/docs</a>, and for contributors at
+<a href="https://stewart-php.github.io/docs-dev/">stewart-php.github.io/docs-dev</a></li>
+<li>The runtime image is also tagged with its major, <code>1</code> and <code>1-dev</code>, rebuilt every week</li>
+</ul>
+<h3 id="changed-3">Changed</h3>
+<ul>
+<li>The skeleton uses the <code>runtime:1</code> image tag, and <code>make upgrade</code> writes the major for image tags</li>
+</ul>
+<h3 id="upgrading-2">Upgrading</h3>
+<ol>
+<li>Run <code>make upgrade VERSION=1.0</code>. Protocols are unchanged, so a 0.11 daemon, <code>stewart</code> CLI and Home Assistant
+integration work with 1.0.</li>
+<li>Change the image tag in <code>Dockerfile</code> and the compose files from <code>runtime:1.0</code> to <code>runtime:1</code> (<code>1-dev</code> in
+<code>compose.dev.yaml</code>), so the image keeps getting PHP and Alpine fixes after 1.1. Copy <code>bin/upgrade-stewart.sh</code> from
+<a href="https://github.com/stewart-php/skeleton">the skeleton</a> so later upgrades do the same.</li>
+</ol>
+<h2 id="0111---2026-10-13">[0.11.1] - 2026-10-13</h2>
+<p>Publishes the runtime image, Helm chart and GitHub release that 0.11.0 did not.</p>
+<h3 id="fixed-3">Fixed</h3>
+<ul>
+<li>The release scans each runtime image for its own platform, so the arm64 build no longer fails it</li>
+</ul>
+<h2 id="0110---2026-10-13">[0.11.0] - 2026-10-13</h2>
+<p>Handlers can wait for states and events, apps can define their own Home Assistant actions, and <code>AppHarness</code> makes
+apps easy to test. Workers can be restarted on demand, Stewart can run from environment variables alone, and many
+reliability issues are fixed.</p>
+<h3 id="added-4">Added</h3>
+<ul>
+<li>Awaitable waits with timeouts: <code>waitForState()</code>, <code>EventStream::waitForNext()</code> and <code>Timers::waitFor()</code></li>
+<li>App-defined Home Assistant actions with <code>EntityExposure::exposeAction()</code></li>
+<li><code>AppHarness</code> and <code>ManualScheduler</code> in <code>stewart-php/testing</code> for testing apps on virtual time</li>
+<li><code>HaContext::wasCausedByStewart()</code> to tell Stewart’s own changes apart</li>
+<li><code>stewart worker:restart</code> and <code>POST /api/workers/{id}/restart</code></li>
+<li>Running without a <code>stewart.yaml</code>, configured from the environment alone</li>
+<li>App options read from a file through <code>STEWART_APPS__&lt;APP&gt;__OPTIONS__&lt;NAME&gt;_FILE</code></li>
+<li><code>StateChange::withFrom()</code></li>
+</ul>
+<h3 id="changed-4">Changed</h3>
+<ul>
+<li><code>whenChangedTo()</code> takes <code>from:</code> and <code>fromAnyState:</code> arguments instead of chained calls</li>
+<li><code>stewart-php/contracts</code> holds only the app-facing API; internal helpers moved to <code>stewart-php/support</code></li>
+<li><code>stewart-php/testing</code> is public and covered by the backward-compatibility check</li>
+<li>Exceptions are created with <code>createForReason()</code>, and collections with <code>fromList()</code>; most shortcut factories are gone</li>
+<li>A full subscription queue drops superseded changes first, so each entity’s latest change still arrives</li>
+<li>History queries share the service-call in-flight limit</li>
+<li><code>off</code> or an empty value disables <code>persistence.url</code>, <code>mqtt.url</code> and the <code>listen</code> settings</li>
+<li>App IDs in <code>stewart.yaml</code> may use <code>_</code> in place of <code>-</code></li>
+<li>Control and IPC protocol 29, component protocol 2 and generated code format 6</li>
+</ul>
+<h3 id="fixed-4">Fixed</h3>
+<ul>
+<li>Large resyncs and bursts of state changes are no longer partly lost</li>
+<li>Exposed entities come back right after the <code>stewart</code> integration reloads</li>
+<li>Commands to a paused or stopped app are refused at once instead of timing out</li>
+<li>Environment overrides work for hyphenated app IDs and camelCase options</li>
+<li>One-shot timers that come due while an app is paused run when it resumes</li>
+<li>Startup stops when no worker can start, and readiness reports when no worker is running</li>
+<li>Handlers that keep failing from timers log far less</li>
+<li>MQTT no longer loops on invalid topics, unacknowledged messages or rejected connections</li>
+<li>Release pipeline: package tags, CI gate and image scanning</li>
+</ul>
+<h3 id="removed">Removed</h3>
+<ul>
+<li><code>StateTransitionStream</code>, <code>-&gt;from()</code> and <code>-&gt;fromAnyState()</code></li>
+<li>Injectable <code>StewartIdentity</code></li>
+<li><code>runAtSunrise()</code> and <code>runAtSunset()</code></li>
+</ul>
+<h3 id="upgrading-3">Upgrading</h3>
+<ol>
+<li>Run <code>make upgrade VERSION=0.11</code>, then <code>make generate</code>. Upgrade the daemon, the <code>stewart</code> CLI and the Home Assistant
+integration together; older versions refuse to talk to 0.11.</li>
+<li>Replace <code>-&gt;whenChangedTo('on')-&gt;from('off')</code> with <code>-&gt;whenChangedTo('on', from: 'off')</code>, and <code>-&gt;fromAnyState()</code>
+with <code>fromAnyState: true</code>.</li>
+<li>Replace <code>runAtSunrise()</code> and <code>runAtSunset()</code> with <code>runAtSunEvent(SunEvent::Sunrise, …)</code> or <code>SunEvent::Sunset</code>.</li>
+<li>Replace an injected <code>StewartIdentity</code> with <code>$ha-&gt;wasCausedByStewart($change)</code>.</li>
+<li>Replace removed exception factories with <code>createForReason()</code>, <code>fromWire()</code> with <code>restoreFromWire()</code>, and removed
+collection factories such as <code>fromIds()</code> with <code>fromList()</code>.</li>
+<li>Import classes that moved out of <code>stewart-php/contracts</code> from <code>Stewart\Support\…</code>.</li>
+<li>Custom implementations of <code>Timers</code>, <code>EventStream</code>, <code>HaContext</code> or <code>EntityExposure</code> add the new methods.</li>
+<li>An app option variable ending in <code>_FILE</code> is now read as a file; set the option in <code>stewart.yaml</code> to keep passing
+the path itself.</li>
+</ol>
+<h2 id="0100---2026-10-12">[0.10.0] - 2026-10-12</h2>
+<p>A maintenance release: quieter worker shutdown, tighter package manifests and a hardened skeleton CI.</p>
+<h3 id="fixed-5">Fixed</h3>
+<ul>
+<li>Workers stopping during daemon shutdown no longer log errors: a worker in the new <code>Stopping</code> state drops sends after
+its shutdown request, and a disconnecting worker counts as closed</li>
+<li>Generated field summaries keep a label or description of <code>"0"</code></li>
+</ul>
+<h3 id="changed-5">Changed</h3>
+<ul>
+<li><code>stewart-php/contracts</code> and <code>stewart-php/runtime</code> require <code>ext-filter</code>; <code>stewart-php/client</code> and
+<code>stewart-php/store-redis</code> no longer require <code>revolt/event-loop</code> directly</li>
+<li><code>RecordingLogger</code> and <code>RecordedLog</code> in <code>stewart-php/testing</code> accept any log context array, as PSR-3 does</li>
+<li>The skeleton’s workflows check out without persisted credentials and grant <code>packages: write</code> only to the image jobs;
+its <code>Dockerfile</code> sets <code>WORKDIR /app</code> in the build stage</li>
+</ul>
+<h3 id="upgrading-4">Upgrading</h3>
+<ol>
+<li>Run <code>make upgrade VERSION=0.10</code>. Control and IPC protocols are unchanged, but broker, workers and <code>stewart</code>
+commands should all run 0.10.</li>
+<li>Update the <code>stewart</code> integration to 0.10.0 in Home Assistant.</li>
+<li>Optionally take over the skeleton’s <code>.github/workflows/*.yml</code> and <code>Dockerfile</code> changes.</li>
+</ol>
+<h2 id="090---2026-10-09">[0.9.0] - 2026-10-09</h2>
+<p>Apps now show up in Home Assistant as entities of their own. The new <code>stewart</code> integration, installed through HACS,
+lets an app expose sensors, switches, buttons, numbers, selects and other controls, receive their commands, and edit
+entity registry entries.</p>
+<h3 id="highlights">Highlights</h3>
+<ul>
+<li><strong>The <code>stewart</code> Home Assistant integration.</strong> Installed from <code>stewart-php/hass-stewart</code> through HACS; the daemon
+detects it on every connect and <code>stewart status</code> shows it on a <code>component</code> row.</li>
+<li><strong>Exposed entities.</strong> An injected <code>EntityExposure</code> gives apps <code>sensor</code>, <code>binary_sensor</code>, <code>switch</code>, <code>button</code>,
+<code>number</code>, <code>select</code>, <code>text</code>, <code>time</code>, <code>date</code> and <code>datetime</code> entities. <code>watchCommands()</code> streams typed commands, and
+entities turn unavailable while their app or daemon is down.</li>
+<li><strong>Registry edits.</strong> An injected <code>RegistryEditor</code> renames, labels, hides or moves entities in Home Assistant’s entity
+registry.</li>
+<li><strong>Testing.</strong> <code>RecordingEntityExposure</code> and <code>RecordingRegistryEditor</code> in <code>stewart-php/testing</code> cover both in unit
+tests.</li>
+</ul>
+<h3 id="added-5">Added</h3>
+<ul>
+<li>The protocol between Stewart and its Home Assistant integration, <code>integrations/home-assistant/PROTOCOL.md</code>, with
+JSON goldens for every message in <code>integrations/home-assistant/tests/protocol/</code></li>
+<li>The <code>stewart</code> Home Assistant integration, installed through HACS from <code>stewart-php/hass-stewart</code> or by unpacking
+<code>stewart.zip</code> from its releases; Home Assistant 2026.4 or newer. It has a config flow, <code>stewart/version</code> and
+<code>stewart/session/subscribe</code></li>
+<li>The <code>stewart</code> integration creates and drives <code>sensor</code> and <code>binary_sensor</code> entities through
+<code>stewart/entity/upsert</code>, <code>state</code> and <code>remove</code>. Each daemon gets a hub device and each app a device under it, or an
+entity names its own device. Entities restore their state and attributes after a Home Assistant restart and become
+unavailable while their daemon has no session</li>
+<li><code>stewart/entity/reconcile</code> removes every entity of a daemon that it no longer exposes, except those of the apps it
+names in <code>keep_apps</code></li>
+<li><code>make ha-check</code> (ruff, mypy, pytest; <code>HA=min</code> for Home Assistant 2026.4) as part of <code>make check</code>, and
+<code>make ha-hassfest</code></li>
+<li>The daemon detects the <code>stewart</code> integration on every Home Assistant connect and holds its session open;
+<code>stewart status</code> shows it on a <code>component</code> row, with the reason when it is missing, speaks another protocol or was
+taken over by another daemon</li>
+<li><code>expose.instance</code> setting (<code>default</code>), naming this daemon in Home Assistant; daemons sharing one Home Assistant need
+different names</li>
+<li>Shortly after startup, once every worker is ready or quarantined, the daemon removes its entities that no running
+app exposed; entities of apps that failed or did not start stay. <code>expose.prune: false</code> turns it off</li>
+<li>Metrics <code>stewart_component_info{version,protocol}</code> and <code>stewart_component_state{state}</code></li>
+<li><code>stewart status</code> shows how many entities each app exposes in an <code>exposed</code> column, also exported as
+<code>stewart_app_exposed_entities</code></li>
+<li>Apps expose their own <code>sensor</code> and <code>binary_sensor</code> entities through an injected <code>EntityExposure</code>:
+<code>exposeSensor()</code> and <code>exposeBinarySensor()</code> return handles that set the value, attributes and availability and
+read back the entity ID and the state Home Assistant restored. Exposed entities are sent again after every
+reconnect; without a compatible integration, <code>expose*()</code> throws <code>ExposureException</code></li>
+<li><code>Stewart\Testing\Exposure\RecordingEntityExposure</code> for unit tests of apps that expose entities</li>
+<li><code>Stewart\Testing\Registry\RecordingRegistryEditor</code> records registry edits and applies them to an <code>InMemoryRegistry</code></li>
+<li>The skeleton’s <code>HelloApp</code> exposes <code>sensor.stewart_hello_changes_seen</code>; without the integration it logs why and keeps
+running</li>
+<li><code>make test-ha-e2e</code> (<code>HA=min|latest</code>) boots a real Home Assistant with the integration and checks that the skeleton’s
+sensor appears, updates and turns unavailable when the daemon stops; CI runs it on both versions</li>
+<li>The <code>stewart</code> integration creates <code>switch</code> and <code>button</code> entities. Their service calls send a <code>command</code> event, with
+the call’s context, on the session and wait for <code>stewart/command/result</code>; a refusal, a timeout or the session
+ending fails the call</li>
+<li>Apps expose switches and buttons with <code>exposeSwitch()</code> and <code>exposeButton()</code>. <code>watchCommands()</code> streams
+<code>SwitchCommand</code> and <code>ButtonPress</code>; a handler that returns accepts the command, <code>CommandException::rejected()</code>
+fails it with its message. Commands for paused or stopped apps fail at once, and a worker dying mid-command fails
+it without waiting for the timeout</li>
+<li><code>expose.command_timeout</code> setting (<code>10s</code>, at most <code>300s</code>): how long Home Assistant waits for an app’s answer</li>
+<li>Metric <code>stewart_app_exposed_commands_total{outcome}</code> (<code>accepted</code>, <code>rejected</code>, <code>refused</code>, <code>lost</code>)</li>
+<li><code>RecordingExposedSwitch::pushCommand()</code> and <code>RecordingExposedButton::pushCommand()</code> run an app’s command handlers in
+unit tests</li>
+<li>The skeleton’s <code>HelloApp</code> exposes <code>switch.stewart_hello_counting</code>, which pauses its change counter, and
+<code>number.stewart_hello_step</code>, how much each change adds, whose icon shows the pause through <code>updateConfig()</code>; the
+e2e smoke test sets the step and turns counting off and on</li>
+<li>The <code>stewart</code> integration creates <code>number</code>, <code>select</code>, <code>text</code>, <code>time</code>, <code>date</code> and <code>datetime</code> entities; their
+<code>set_value</code> and <code>select_option</code> service calls send <code>set_value</code> and <code>select_option</code> commands</li>
+<li>Apps expose numbers, selects, texts, times, dates and datetimes with <code>exposeNumber()</code>, <code>exposeSelect()</code>,
+<code>exposeText()</code>, <code>exposeTime()</code>, <code>exposeDate()</code> and <code>exposeDateTime()</code>. Times are <code>TimeOfDay</code>, dates and datetimes
+<code>DateTimeImmutable</code>. <code>watchCommands()</code> streams a typed command per platform; an accepted command sets the handle’s
+value. The <code>RecordingExposed*</code> handles push them in unit tests</li>
+<li>Every exposed handle has <code>getConfig()</code> and <code>updateConfig()</code>, which changes the entity’s name, icon, options or
+limits in place and keeps its device; Home Assistant drops a value that no longer fits to unknown</li>
+<li><code>RegisteredEntity</code> carries the entity’s <code>icon</code>, and <code>aliases</code> as <code>EntityAlias</code> where Home Assistant sends them; the
+mirrored registry has none, so it holds <code>null</code> there</li>
+<li>Apps edit Home Assistant entity registry entries through an injected <code>RegistryEditor</code>: <code>updateEntity()</code> takes an
+<code>EntityRegistryUpdate</code> that renames, sets the icon, area, labels and aliases, hides or disables an entity, and
+returns the updated <code>RegisteredEntity</code>. Added and removed labels and aliases merge with the entry Home Assistant
+holds. Edits share the service-call budget and follow <code>service_calls.dry_run</code>; failures throw
+<code>RegistryEditException</code>. Editing an entity that a Stewart app exposes logs a warning naming the app and key</li>
+</ul>
+<h3 id="changed-6">Changed</h3>
+<ul>
+<li>Entities of an app that fails, stops or loses its worker turn unavailable until the app exposes them again, instead
+of keeping their last state as if live</li>
+<li>The control protocol is version 28: snapshots carry <code>component</code> and each app’s <code>exposed_entities</code> and
+<code>exposed_commands</code></li>
+<li>IPC protocol 26; broker and workers must run the same version</li>
+</ul>
+<h3 id="upgrading-5">Upgrading</h3>
+<ol>
+<li>Run <code>make upgrade VERSION=0.9</code>. Broker, workers and <code>stewart</code> commands must all run 0.9; <code>stewart status</code> against
+a 0.8 daemon is refused (control protocol 28).</li>
+<li>Install the <code>stewart</code> integration 0.9.0 in Home Assistant 2026.4 or newer before an app calls <code>expose*()</code>; without
+it, <code>expose*()</code> throws <code>ExposureException</code>. Apps that expose nothing need no integration.</li>
+<li>Daemons sharing one Home Assistant set a different <code>expose.instance</code> each.</li>
+</ol>
+<h2 id="080---2026-10-08">[0.8.0] - 2026-10-08</h2>
+<p>A git deployment now follows its branch. The daemon fetches the ref every minute, installs a new commit beside the
+running one, checks it with <code>stewart check</code>, and only then restarts itself on it, without a pod restart. A commit that
+fails the check is never deployed.</p>
+<h3 id="highlights-1">Highlights</h3>
+<ul>
+<li><strong>Deploys without restarts.</strong> In git mode (<code>code.mode: git</code>, <code>deploy/compose.git.yaml</code>) each push reaches the daemon
+within <code>deploy.git.poll</code>; dependencies are copied from the running release when <code>composer.lock</code> is unchanged.</li>
+<li><strong>A bad commit stays out.</strong> A commit whose configuration or <code>apps/</code> files do not load is rejected, logged, shown by
+<code>stewart status</code> and counted in <code>stewart_deploy_failures_total</code>; the running release keeps going.</li>
+<li><strong><code>stewart check</code>.</strong> The same validation runs from the command line, for CI or before a deploy.</li>
+</ul>
+<h3 id="added-6">Added</h3>
+<ul>
+<li><code>stewart check</code> fails when the configuration does not load or a file in <code>apps/</code> cannot be loaded</li>
+<li><code>deploy.git.poll</code> (<code>off</code> by default) and <code>deploy.git.prepare_timeout</code> (<code>10m</code>) settings</li>
+<li>The runtime image keeps git releases in <code>/app/releases/&lt;sha&gt;</code> with <code>/app/current</code> pointing at the running one, keeps
+the three newest, and records rejected commits so they are not checked again</li>
+<li><code>stewart-entrypoint release-prepare</code>, <code>release-check</code> and <code>release-stage</code>, which the daemon runs while it polls</li>
+<li><code>stewart run</code> exits with 75 when it stops to start again on a staged release; the entrypoint restarts it</li>
+<li><code>stewart status</code> shows the deployed commit, the last poll and the last rejected commit with its reason</li>
+<li>Metrics <code>stewart_deploy_info{commit}</code> and <code>stewart_deploy_failures_total</code></li>
+<li>Chart value <code>code.git.poll</code> (<code>1m</code>)</li>
+</ul>
+<h3 id="changed-7">Changed</h3>
+<ul>
+<li>The chart’s git mode fetches in the daemon container; the <code>checkout</code> init container is gone</li>
+<li><code>code.generateOnStart</code> applies in git mode through the daemon container</li>
+<li>In git mode the entrypoint keeps PHP as its child and forwards SIGTERM and SIGINT to it</li>
+<li>Restarting a git deployment checks a new head before running it, instead of running it unchecked</li>
+<li><code>STEWART_BOOT_*</code> variables stay set in git mode, so the daemon can run the entrypoint’s release commands</li>
+<li>The control protocol is version 24: snapshots carry <code>deploy</code></li>
+<li><code>stewart-php/runtime</code> requires <code>amphp/process</code> directly</li>
+</ul>
+<h3 id="upgrading-6">Upgrading</h3>
+<ol>
+<li>Run <code>make upgrade VERSION=0.8</code>. Broker, workers and <code>stewart</code> commands must all run 0.8; <code>stewart status</code> against
+a 0.7 daemon is refused (control protocol 24).</li>
+<li>A git deployment whose <code>composer.lock</code> still holds runtime 0.7 sets <code>code.git.poll: off</code> (or drops
+<code>STEWART_DEPLOY__GIT__POLL</code> from <code>compose.git.yaml</code>) until it upgrades; 0.7 stops on the unknown variable.</li>
+<li>A compose git volume from 0.7 is converted on the first start: the old checkout is removed and the release layout
+created, with one full dependency install.</li>
+<li>Code calling <code>BrokerLifecycle::run()</code> directly gets a <code>BrokerStopOutcome</code> back instead of nothing.</li>
+</ol>
+<h2 id="070---2026-10-07">[0.7.0] - 2026-10-07</h2>
+<p>Automations need less glue. State streams can start from the current state and react to numeric thresholds, a
+schedule can follow an <code>input_datetime</code>, and states and clocks answer “how long?” and “is it night?” directly.</p>
+<h3 id="highlights-2">Highlights</h3>
+<ul>
+<li><strong>Numeric thresholds.</strong> <code>watchStateChanges('sensor.living_room_temperature')-&gt;whenAbove(25.0, for: Duration::minutes(5), hysteresis: 0.5)</code> fires once per crossing; <code>whenBelow()</code> is its mirror, and <code>attribute:</code>
+reads a climate entity’s <code>current_temperature</code> instead of the state.</li>
+<li><strong>Starting from now.</strong> <code>startWithCurrentState()</code> emits each matching entity’s current state before live changes,
+marked <code>StateChange::isInitial()</code>, so a handler no longer reads the state once by hand at startup.</li>
+<li><strong>Entity-driven schedules.</strong> <code>$scheduler-&gt;runAtEntityTime('input_datetime.wake_up', fn () =&gt; …)</code> runs at the time
+the helper or a timestamp sensor holds and follows its changes, without a Home Assistant trigger subscription.</li>
+<li><strong>Time helpers.</strong> <code>$clock-&gt;isWithin('22:00', '06:00')</code> checks a daily window across midnight, and
+<code>$state-&gt;hasHeldFor(Duration::minutes(10), $clock)</code> checks how long a state has kept its value.</li>
+</ul>
+<h3 id="added-7">Added</h3>
+<ul>
+<li><code>Clock::isWithin()</code> tells whether local time is in a daily window; the start is included, the end is not, and an
+equal start and end is refused (<code>ScheduleError::TimeWindowEmpty</code>)</li>
+<li><code>EntityState::hasHeldFor()</code> and <code>getHeldDuration()</code> measure the time since <code>lastChangedAt</code></li>
+<li><code>whenAbove()</code> and <code>whenBelow()</code> on state streams fire once per numeric threshold crossing, with <code>for:</code>, <code>attribute:</code>
+and <code>hysteresis:</code>
+<ul>
+<li>A crossing counts only from a known number; a first reading or one after <code>unavailable</code> primes without firing</li>
+<li>A negative hysteresis or a non-finite threshold is refused (<code>StateError::ThresholdHysteresisNegative</code>,
+<code>ThresholdNotFinite</code>)</li>
+</ul>
+</li>
+<li><code>startWithCurrentState()</code> on state streams emits the matching entities’ current states first, marked
+<code>StateChange::isInitial()</code> (<code>StateChangeOrigin::Initial</code>); only the operators after it see them</li>
+<li><code>Scheduler::runAtEntityTime()</code> runs at the time an <code>input_datetime</code> or timestamp sensor holds
+<ul>
+<li>A date and time runs once, a time alone every day; a date only, a past moment or <code>unavailable</code> waits for the next
+change</li>
+<li>It re-arms on every change, re-reads the entity when a paused app resumes and right before each run</li>
+<li>Other domains are refused (<code>ScheduleError::EntityTimeDomainUnsupported</code>)</li>
+</ul>
+</li>
+<li><code>RecordingHaContext::seedState()</code> takes a <code>changedAt:</code> instant</li>
+</ul>
+<h3 id="changed-8">Changed</h3>
+<ul>
+<li><code>RecordingHaContext::seedState()</code> and <code>pushState()</code> stamp <code>lastChangedAt</code> and <code>lastUpdatedAt</code>; <code>pushState()</code> moves
+<code>lastChangedAt</code> only when the value changes</li>
+<li><code>StateChanges</code> and <code>StateTransitions</code> take a <code>CurrentStateReader</code></li>
+</ul>
+<h3 id="upgrading-7">Upgrading</h3>
+<ol>
+<li>Run <code>make upgrade VERSION=0.7</code>. Broker, workers and <code>stewart</code> commands must all run 0.7.</li>
+<li>Code that constructs <code>StateChanges</code> or <code>StateTransitions</code> directly now passes a <code>CurrentStateReader</code>.</li>
+<li>Custom <code>Clock</code> and <code>Scheduler</code> implementations add <code>isWithin()</code> and <code>runAtEntityTime()</code>.</li>
+<li>Tests comparing whole <code>EntityState</code> objects from <code>RecordingHaContext</code> with <code>assertEquals</code> now see the stamped
+<code>lastChangedAt</code> and <code>lastUpdatedAt</code>.</li>
+</ol>
+<h2 id="060---2026-10-06">[0.6.0] - 2026-10-06</h2>
+<p>Stewart can now be operated from outside. Apps can be paused and resumed without a restart, from the CLI or over
+HTTP, and the daemon answers Kubernetes probes and Prometheus scrapes on its own HTTP ports.</p>
+<h3 id="highlights-3">Highlights</h3>
+<ul>
+<li><strong>Pausing apps.</strong> <code>stewart app:pause porch</code> stops an app’s events and schedule runs without unloading it;
+<code>app:resume</code> undoes it and <code>app:reset</code> hands the decision back to <code>apps.&lt;id&gt;.paused</code> in <code>stewart.yaml</code>. With a
+persistence store the choice survives restarts.</li>
+<li><strong>HTTP probes.</strong> <code>http.listen</code> answers <code>/healthz</code> and <code>/readyz</code> in-process, so Kubernetes probes no longer start PHP.
+The chart uses them by default.</li>
+<li><strong>HTTP admin API.</strong> <code>http.admin.listen</code> with a bearer token lists apps, pauses, resumes and resets them, and
+serves <code>/metrics</code>.</li>
+<li><strong>Prometheus metrics.</strong> <code>/metrics</code> exposes <code>stewart_*</code> metrics for apps, workers, the Home Assistant connection,
+routing, service calls and the store; the chart can create a <code>PodMonitor</code>.</li>
+</ul>
+<h3 id="added-8">Added</h3>
+<ul>
+<li><code>apps.&lt;id&gt;.paused</code> starts an app loaded but paused</li>
+<li><code>stewart app:pause</code>, <code>app:resume</code> and <code>app:reset</code> change an app’s pause at run time
+<ul>
+<li>A paused app keeps its subscriptions and schedules but receives no events or runs; they count as <code>suppressed</code></li>
+<li>Pauses and resumes are stored in the persistence store and restored on start; <code>app:reset</code> removes the stored
+override so config decides again, and also clears overrides of apps no longer loaded</li>
+<li>Unknown or disabled apps are refused; a change that could not be stored is applied and reported as a warning</li>
+</ul>
+</li>
+<li><code>stewart status</code> shows <code>(paused by &lt;source&gt; &lt;since&gt; ago)</code> and a <code>suppressed</code> column</li>
+<li><code>http.listen</code> (default <code>off</code>) serves <code>/healthz</code> and <code>/readyz</code>, with the same verdicts as <code>stewart status --probe</code></li>
+<li><code>http.admin.listen</code> (default <code>off</code>) and <code>http.admin.token</code> start the HTTP admin API; the daemon refuses to start
+without a token
+<ul>
+<li><code>GET /api/apps</code>, <code>GET /api/apps/&lt;id&gt;</code></li>
+<li><code>POST /api/apps/&lt;id&gt;/pause</code>, <code>/resume</code> and <code>/reset</code>, recorded with the <code>http</code> source</li>
+<li><code>GET /metrics</code> in the Prometheus text format</li>
+</ul>
+</li>
+<li>Worker restart and quarantine totals over the daemon’s lifetime, in <code>stewart status</code> and as
+<code>stewart_worker_restarts_total</code> and <code>stewart_worker_quarantines_total</code></li>
+<li>Chart
+<ul>
+<li><code>probes.mode</code> (<code>http</code> by default, <code>exec</code> for the previous <code>stewart status --probe</code>), <code>probes.host</code>, <code>probes.port</code></li>
+<li><code>adminApi.*</code> enables the admin API with a generated token kept in the chart secret</li>
+<li><code>adminApi.podMonitor.*</code> creates a Prometheus Operator <code>PodMonitor</code>; it refuses a loopback <code>adminApi.host</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="changed-9">Changed</h3>
+<ul>
+<li><code>AppId</code> rejects ids longer than 100 characters (<code>IdentifierError::AppIdTooLong</code>)</li>
+<li>Chart probes call the HTTP port instead of running <code>stewart status</code> in the pod</li>
+<li>IPC protocol 22 and control protocol 23; broker, workers and the CLI must run the same version</li>
+</ul>
+<h3 id="upgrading-8">Upgrading</h3>
+<ol>
+<li>Run <code>make upgrade VERSION=0.6</code>. Broker, workers and <code>stewart</code> commands must all run 0.6.</li>
+<li>Rename any app whose id is longer than 100 characters.</li>
+<li>On Kubernetes, the chart now probes port 8080 (<code>probes.port</code>); set <code>probes.mode: exec</code> to keep exec probes.</li>
+</ol>
+<h2 id="050---2026-10-06">[0.5.0] - 2026-10-06</h2>
+<p>Apps now know where things are and who did what. They can schedule around the sun, react to any Home Assistant
+trigger, tell their own changes apart from a person’s, fire events, and target entities by area, floor or label.</p>
+<h3 id="highlights-4">Highlights</h3>
+<ul>
+<li><strong>Sun-relative scheduling.</strong> <code>$scheduler-&gt;runAtSunset(fn () =&gt; …, SunOffset::before(Duration::minutes(30)))</code>.
+The new <code>stewart-php/sun</code> package computes sunrise, sunset, twilights, golden hour and sun position locally, and
+its times match Home Assistant’s sun integration. Apps can inject <code>SunCalendar</code>, which uses Home Assistant’s
+location.</li>
+<li><strong>Home Assistant triggers.</strong> <code>HaContext::watchTrigger()</code> streams any trigger platform (time, time pattern,
+template, zone, calendar, device and more), built with <code>HaTrigger::atTime()</code>, <code>whenTemplateTrue()</code> or a raw config.</li>
+<li><strong>Who changed it.</strong> <code>callService()</code> returns the call’s <code>EventContext</code>, and <code>StewartIdentity::wasCausedByStewart()</code>
+tells Stewart’s own changes from a person’s. An app can then skip its own echoes or tell a manual override from
+an automation.</li>
+<li><strong>Firing events.</strong> <code>HaContext::fireEvent()</code> puts custom events on Home Assistant’s bus.</li>
+<li><strong>Areas, floors and labels.</strong> <code>HaContext::getRegistry()</code> reads areas, floors, labels and devices, and <code>EntityFilter</code>
+selects entities through them: <code>watchStateChanges(EntityFilter::inArea('kitchen')-&gt;withDomain('light'))</code>.
+<code>ServiceTarget</code> targets them too, and PhpStorm completes their ids after <code>stewart generate</code>.</li>
+</ul>
+<h3 id="added-9">Added</h3>
+<ul>
+<li><code>stewart-php/sun</code>: sunrise, sunset, solar noon, twilights, golden and blue hour, and sun position, computed locally
+with the NOAA equations and Astral’s refraction, so times agree with Home Assistant’s sun integration
+<ul>
+<li><code>SunCalendar</code> contract: <code>findNextEvent()</code> with an optional <code>SunOffset</code>, <code>getDayOn()</code>, <code>getPositionAt()</code>,
+<code>getCurrentPosition()</code>, <code>isSunUp()</code></li>
+<li><code>SunEvent</code>, <code>SunDay</code>, <code>GeoLocation</code>; <code>SunOffset::applyTo()</code></li>
+<li><code>SunPosition</code> with <code>isHigherThan()</code> and <code>isWithinAzimuth()</code>, a sector that may wrap past north</li>
+<li>Apps get a <code>SunCalendar</code> by type, located at Home Assistant’s latitude, longitude and elevation as read at
+startup; without a location every query throws <code>SunException</code> (<code>LocationUnknown</code>)</li>
+</ul>
+</li>
+<li><code>Scheduler::runAtSunrise()</code>, <code>runAtSunset()</code> and <code>runAtSunEvent()</code> with an optional <code>SunOffset</code>: a recurring
+<code>ScheduledTask</code> with <code>getNextRunAt()</code> and missed-run counts; without a location they throw <code>ScheduleException</code>
+(<code>SunLocationUnknown</code>)</li>
+<li><code>HaContext::watchTrigger()</code> streams Home Assistant triggers (<code>subscribe_trigger</code>) as <code>TriggerEvent</code>s: sun, time,
+time pattern, template, zone, calendar, device and any other trigger platform
+<ul>
+<li><code>HaTrigger</code> builders: <code>onSunrise()</code>, <code>onSunset()</code> with a <code>SunOffset</code>, <code>atTime()</code>, <code>onTimePattern()</code>,
+<code>whenTemplateTrue()</code>, <code>onZoneTransition()</code>; <code>HaTrigger::fromArray()</code> takes any trigger config</li>
+<li>An <code>HaTriggerCollection</code> or a list of configs fires on any of them; <code>variables</code> feed template triggers</li>
+<li>Apps watching the same trigger share one Home Assistant subscription, re-issued after every reconnect</li>
+<li>A trigger Home Assistant rejects is logged and its subscription ends (<code>isActive()</code> is false)</li>
+</ul>
+</li>
+<li><code>RecordingHaContext::pushTrigger()</code> and <code>listWatchedTriggers()</code></li>
+<li><code>Duration::formatAsClock()</code></li>
+<li><code>callService()</code> on <code>HaContext</code>, <code>Entity</code> and generated classes returns the call’s <code>EventContext</code>;
+<code>ServiceResponse::$context</code> carries it for <code>callServiceForResponse()</code>
+<ul>
+<li><code>StateChange::wasCausedBy($context)</code> and <code>EntityState::wasLastChangedBy($context)</code> match the call or anything it
+started (its child contexts)</li>
+<li><code>StewartIdentity</code>, injectable in apps, answers <code>wasCausedByStewart($change)</code> from the token’s Home Assistant user;
+it also recognises the first change of a call, which arrives before <code>callService()</code> returns. It needs a Home
+Assistant user for Stewart alone: with a token from a person’s account, that person’s changes count as Stewart’s</li>
+<li>Under <code>service_calls.dry_run</code> the context id starts with <code>dry-run:</code></li>
+</ul>
+</li>
+<li><code>RecordingHaContext</code> gives each call a context for <code>RecordingHaContext::STEWART_USER_ID</code>, records it on
+<code>RecordedServiceCall::$context</code>, and <code>pushState()</code> takes a causing context</li>
+<li><code>HaContext::fireEvent()</code> fires an event on Home Assistant’s bus and returns its <code>EventContext</code>
+<ul>
+<li>Event data must be keyed and transportable; nulls are kept; bad input throws <code>EventFireException</code> before sending</li>
+<li>Fired events share the <code>service_calls</code> in-flight limits, per-app call counts and <code>dry_run</code> with service calls</li>
+<li>Needs an administrator token, like the rest of Stewart</li>
+<li><code>StewartIdentity::wasCausedByStewart()</code> also takes an <code>HaEvent</code>, so watchers can skip Stewart’s own fired events</li>
+</ul>
+</li>
+<li><code>RecordingHaContext::fireEvent()</code> records to <code>firedEvents</code>, echoes the event to <code>watchEvents()</code>, and
+<code>stubEventFireFailure()</code> makes it throw</li>
+<li><code>HaContext::getRegistry()</code> reads Home Assistant’s areas, floors, labels, devices and registered entities
+<ul>
+<li><code>findArea()</code>, <code>findAreaByName()</code> (name or alias), <code>listAreasOnFloor()</code>, <code>listDevicesInArea()</code>,
+<code>findEntityPlacement()</code> and the same lookups for floors, labels, devices and entities</li>
+<li>Typed <code>AreaId</code>, <code>FloorId</code>, <code>LabelId</code> and <code>DeviceId</code>; every lookup also takes a plain string</li>
+<li>The broker fetches the registries on every connect and again a second after a <code>*_registry_updated</code> event</li>
+</ul>
+</li>
+<li><code>EntityFilter</code> selects entities by area, floor, label, device, domain or id pattern for <code>listStates()</code> and
+<code>watchStateChanges()</code>: <code>EntityFilter::inArea('kitchen')-&gt;withDomain('light')-&gt;withLabel('night')</code>
+<ul>
+<li>Values within one condition are alternatives; all conditions must match</li>
+<li>Area, floor and labels resolve like Home Assistant targets: an entity’s own area overrides its device’s, labels
+come from the entity, its device and its area, and hidden or config/diagnostic entities match only by domain or id</li>
+<li>A running watch picks up registry changes with the next state change</li>
+</ul>
+</li>
+<li><code>ServiceTarget::forAreas()</code>, <code>forFloors()</code>, <code>forLabels()</code> and <code>forDevices()</code> take the typed ids</li>
+<li><code>RecordingHaContext::$registry</code> (<code>InMemoryRegistry</code>) seeds areas, floors, labels, devices and entities for tests</li>
+<li><code>stewart generate</code> stores areas, floors and labels in the snapshot and completes their ids in PhpStorm for
+<code>EntityFilter</code>, <code>Registry</code> lookups, <code>ServiceTarget</code> and the id constructors</li>
+</ul>
+<h3 id="changed-10">Changed</h3>
+<ul>
+<li>A subscription the broker refuses is cancelled in the worker, not just logged</li>
+<li>Refused-call warnings and reasons speak of calls to Home Assistant, covering service calls and fired events</li>
+<li><code>RecordingHaContext</code> numbers contexts across service calls and fired events</li>
+<li>IPC protocol 21; broker and workers must run the same version</li>
+<li><code>HaContext</code> gains <code>watchTrigger()</code>, <code>fireEvent()</code> and <code>getRegistry()</code>, and <code>callService()</code> returns <code>EventContext</code>
+instead of <code>void</code>; a custom implementation must follow</li>
+<li>Builder triggers use the <code>trigger:</code> key, which needs Home Assistant 2024.10 or newer</li>
+<li>Generated code format 5; regenerate after upgrading</li>
+</ul>
+<h3 id="upgrading-9">Upgrading</h3>
+<ol>
+<li>Run <code>make upgrade VERSION=0.5</code>. Broker and workers must both run 0.5 (IPC protocol 21).</li>
+<li>Run <code>make generate</code>.</li>
+</ol>
+<h2 id="040---2026-10-04">[0.4.0] - 2026-10-04</h2>
+<h3 id="added-10">Added</h3>
+<ul>
+<li><code>whenChangedTo()-&gt;from(...)</code> and <code>-&gt;fromAnyState()</code> choose which previous states a transition may come from</li>
+<li><code>getHistory(HistoryQuery)</code> on <code>HaContext</code>, <code>Entity</code> and generated entity classes reads one entity’s recorded
+states from Home Assistant: <code>HistoryQuery::lastFor(Duration::minutes(30))</code> or <code>HistoryQuery::between($from, $until)</code>
+<ul>
+<li><code>withAttributes()</code> includes attributes; <code>withAttributeChanges()</code> also includes attribute-only changes</li>
+<li><code>EntityStateHistory</code> answers <code>hasBeenIn()</code>, <code>getDurationIn()</code>, <code>countChanges()</code> and <code>getLastChangeTo()</code></li>
+<li>Failures throw <code>HistoryException</code>, with <code>HistoryError::RecorderUnavailable</code> when Home Assistant has no history</li>
+</ul>
+</li>
+<li><code>RecordingHaContext</code> answers history from seeded and pushed states; <code>seedHistoricalState()</code> and
+<code>stubHistoryFailure()</code> set it up, <code>historyQueries</code> records every query</li>
+</ul>
+<h3 id="changed-11">Changed</h3>
+<ul>
+<li>Requires PHP 8.5</li>
+<li>Requires <code>amphp/amp</code> 3.1.1 and excludes older <code>amphp/cache</code>, <code>amphp/process</code> and <code>daverandom/libdns</code> releases that
+raise deprecations on PHP 8.5</li>
+<li>Small test adjustment for PHP 8.5</li>
+<li>CI now runs all newest and lowest dependency test sequentially (Newest and lowest deps still runs parallel)</li>
+<li>Generated code format 3; regenerate after upgrading</li>
+</ul>
+<h3 id="upgrading-10">Upgrading</h3>
+<ul>
+<li>Add <code>-&gt;fromAnyState()</code> after any <code>whenChangedTo()</code> that must also fire when an entity comes back from
+<code>unavailable</code> or <code>unknown</code>.</li>
+<li>Run <code>make generate</code>.</li>
+</ul>
+<h2 id="030---2026-10-03">[0.3.0] - 2026-10-03</h2>
+<h3 id="added-11">Added</h3>
+<ul>
+<li><code>$entities-&gt;light-&gt;getEntity('light.hall')</code> returns the typed entity; it also takes an ID string from app options</li>
+<li><code>stewart generate</code> writes <code>.phpstorm.meta.php</code> so PhpStorm completes entity IDs</li>
+</ul>
+<h3 id="changed-12">Changed</h3>
+<ul>
+<li>Generated entity classes implement <code>TypedEntity</code> and throw <code>IdentifierError::EntityNotGenerated</code> for IDs outside
+their generated domain</li>
+<li>Generated code format 2; regenerate after upgrading</li>
+</ul>
+<h3 id="removed-1">Removed</h3>
+<ul>
+<li>Per-entity properties such as <code>$entities-&gt;light-&gt;hall</code></li>
+<li>The <code>codegen.rename</code> setting</li>
+</ul>
+<h3 id="upgrading-11">Upgrading</h3>
+<ol>
+<li>Remove <code>codegen.rename</code> from <code>stewart.yaml</code> and any <code>STEWART_CODEGEN__RENAME</code> from <code>.env</code>; both are now refused.</li>
+<li>Run <code>make generate</code>.</li>
+<li>Replace <code>$entities-&gt;&lt;domain&gt;-&gt;&lt;entity&gt;</code> with <code>$entities-&gt;&lt;domain&gt;-&gt;getEntity('&lt;entity id&gt;')</code>.</li>
+</ol>
+<h2 id="021---2026-10-03">[0.2.1] - 2026-10-03</h2>
+<p>The first published release of the 0.2 line; see 0.2.0 for what it adds and how to upgrade.</p>
+<h3 id="fixed-6">Fixed</h3>
+<ul>
+<li>The skeleton requires the 0.2 packages and the <code>runtime:0.2</code> image</li>
+</ul>
+<h2 id="020---2026-10-03">[0.2.0] - 2026-10-03</h2>
+<h3 id="added-12">Added</h3>
+<ul>
+<li>New <code>stewart-php/mqtt</code> package with MQTT 3.1.1 support: apps take <code>Mqtt</code> to publish/subscribe configured under
+<code>mqtt</code> in <code>stewart.yaml</code>.
+Supported MQTT features:
+<ul>
+<li>QoS 0 and 1</li>
+<li>Retain,</li>
+<li>TLS,</li>
+<li>Last will</li>
+<li>Reconnect with resubscribe.</li>
+</ul>
+</li>
+<li>New makefile targets (<code>demo</code>, <code>demo-create</code>, <code>demo-sh</code>, <code>demo-clean</code>) for easier local testing/development
+against real instances</li>
+<li><code>make upgrade VERSION=X.Y</code> in the skeleton moves a project to another release line</li>
+</ul>
+<h3 id="upgrading-12">Upgrading</h3>
+<p>To make life easier in long term, I added an upgrade script, that script needs to be added manually, later on upgrades
+can be made by executing only one make target.</p>
+<ol>
+<li>
+<p>Fetch the upgrade script and keep it out of the production image:</p>
+<div class="expressive-code"><link rel="stylesheet" href="/docs-dev/_astro/ec.zh6mu.css"><script type="module" src="/docs-dev/_astro/ec.0vx5m.js"></script><figure class="frame is-terminal not-content"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre data-language="bash"><code><div class="ec-line"><div class="code"><span style="--0:#80A665;--1:#4B7231">mkdir</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#C99076;--1:#995728">-p</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#C98A7D;--1:#96574A">bin</span></div></div><div class="ec-line"><div class="code"><span style="--0:#80A665;--1:#4B7231">curl</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#C99076;--1:#995728">-fsSLo</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#C98A7D;--1:#96574A">bin/upgrade-stewart.sh</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#C99076;--1:#995728">\</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C98A7D;--1:#96574A">https://raw.githubusercontent.com/stewart-php/skeleton/v0.2.0/bin/upgrade-stewart.sh</span></div></div><div class="ec-line"><div class="code"><span style="--0:#B8A965;--1:#786713">echo</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#C98A7D;--1:#96574A">bin</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#CB7676;--1:#9E5252">&gt;&gt;</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#C98A7D;--1:#96574A">.dockerignore</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="mkdir -p bincurl -fsSLo bin/upgrade-stewart.sh \    https://raw.githubusercontent.com/stewart-php/skeleton/v0.2.0/bin/upgrade-stewart.shecho bin >> .dockerignore"><div></div></button></div></figure></div>
+</li>
+<li>
+<p>Add the target to your <code>Makefile</code>, next to <code>update</code>; the recipe lines start with a tab:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="makefile"><code><div class="ec-line"><div class="code"><span style="--0:#B8A965;--1:#786713">.PHONY</span><span style="--0:#8B8B8B;--1:#686868">:</span><span style="--0:#DBD7CAEE;--1:#393A34"> upgrade</span></div></div><div class="ec-line"><div class="code"><span style="--0:#80A665;--1:#4B7231">upgrade</span><span style="--0:#8B8B8B;--1:#686868">:</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#818F81FE;--1:#636B63">## Move to another Stewart release line, then pull its images and install it [VERSION=0.2]</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#8B8B8B;--1:#686868">$(</span><span style="--0:#C98A7D;--1:#96574A">RUN</span><span style="--0:#8B8B8B;--1:#686868">)</span><span style="--0:#DBD7CAEE;--1:#393A34"> sh bin/upgrade-stewart.sh </span><span style="--0:#8B8B8B;--1:#686868">$(</span><span style="--0:#C98A7D;--1:#96574A">VERSION</span><span style="--0:#8B8B8B;--1:#686868">)</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#8B8B8B;--1:#686868">$(</span><span style="--0:#C98A7D;--1:#96574A">DEV</span><span style="--0:#8B8B8B;--1:#686868">)</span><span style="--0:#DBD7CAEE;--1:#393A34"> pull</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#8B8B8B;--1:#686868">$(</span><span style="--0:#C98A7D;--1:#96574A">RUN</span><span style="--0:#8B8B8B;--1:#686868">)</span><span style="--0:#DBD7CAEE;--1:#393A34"> composer update 'stewart-php/*' --with-all-dependencies --no-interaction</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code=".PHONY: upgradeupgrade: ## Move to another Stewart release line, then pull its images and install it [VERSION=0.2]  $(RUN) sh bin/upgrade-stewart.sh $(VERSION)  $(DEV) pull  $(RUN) composer update &#x27;stewart-php/*&#x27; --with-all-dependencies --no-interaction"><div></div></button></div></figure></div>
+</li>
+<li>
+<p>To use MQTT, add <code>"stewart-php/mqtt": "^0.2"</code> to <code>require</code> in <code>composer.json</code>.</p>
+</li>
+<li>
+<p>Upgrade. This points every <code>stewart-php/*</code> requirement and runtime image tag at 0.2, pulls the images and installs:</p>
+<div class="expressive-code"><figure class="frame is-terminal not-content"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre data-language="bash"><code><div class="ec-line"><div class="code"><span style="--0:#80A665;--1:#4B7231">make</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#C98A7D;--1:#96574A">upgrade</span><span style="--0:#DBD7CAEE;--1:#393A34"> </span><span style="--0:#C98A7D;--1:#96574A">VERSION=</span><span style="--0:#4C9A91;--1:#2C7181">0.2</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="make upgrade VERSION=0.2"><div></div></button></div></figure></div>
+</li>
+<li>
+<p>If you added MQTT, set <code>STEWART_MQTT__URL</code> in <code>.env</code>, such as <code>mqtt://user:password@homeassistant.local:1883</code>, and
+check the <code>mqtt</code> section with <code>make config</code>. Without the URL nothing changes.</p>
+</li>
+<li>
+<p>Check it with <code>make doctor</code> and <code>make run</code>. On the server, commit and push, then run <code>make deploy</code>.</p>
+</li>
+</ol>
+<h2 id="010---2026-10-03">[0.1.0] - 2026-10-03</h2>
+<p>First release.</p>
+<h3 id="added-13">Added</h3>
+<ul>
+<li>First dev-only version release</li>
+</ul>
+</div><footer class="sl-flex astro-ddtxxk7k"><div class="meta sl-flex astro-ddtxxk7k"><a href="https://github.com/stewart-php/stewart/edit/main/CHANGELOG.md" class="sl-flex print:hidden astro-qlekgd3o"><svg aria-hidden="true" class="astro-qlekgd3o astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.2em;"><path d="M22 7.24a1 1 0 0 0-.29-.71l-4.24-4.24a1 1 0 0 0-1.1-.22 1 1 0 0 0-.32.22l-2.83 2.83L2.29 16.05a1 1 0 0 0-.29.71V21a1 1 0 0 0 1 1h4.24a1 1 0 0 0 .76-.29l10.87-10.93L21.71 8c.1-.1.17-.2.22-.33a1 1 0 0 0 0-.24v-.14l.07-.05ZM6.83 20H4v-2.83l9.93-9.93 2.83 2.83L6.83 20ZM18.17 8.66l-2.83-2.83 1.42-1.41 2.82 2.82-1.41 1.42Z"/></svg>Edit page</a></div><div class="pagination-links print:hidden astro-g3wxxdym" dir="ltr"><a href="/docs-dev/releasing/" rel="prev" class="astro-g3wxxdym"><span class="link-label sl-flex astro-g3wxxdym"><svg aria-hidden="true" class="astro-g3wxxdym astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg>Previous</span><span class="link-title astro-g3wxxdym">Releasing</span></a><a href="/docs-dev/architecture/" rel="next" class="astro-g3wxxdym"><span class="link-label sl-flex astro-g3wxxdym">Next<svg aria-hidden="true" class="astro-g3wxxdym astro-hkc32dio" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg></span><span class="link-title astro-g3wxxdym">Architecture</span></a></div></footer></div></div></main></div></div></div></div></body></html>
